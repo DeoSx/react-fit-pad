@@ -1,0 +1,4 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://damir:Gympad12345@react-gympad-bll46.mongodb.net/gympad?retryWrites=true&w=majority"
+}
