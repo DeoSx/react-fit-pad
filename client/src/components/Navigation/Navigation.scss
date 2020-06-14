@@ -1,0 +1,21 @@
+.nav {
+  margin-top: 20px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  .logo {
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+  .links {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-around;
+    width: 15%;
+  }
+}
