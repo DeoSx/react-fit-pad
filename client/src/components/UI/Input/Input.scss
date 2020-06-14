@@ -1,0 +1,22 @@
+.input-group {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  label {
+    margin-bottom: 5px;
+  }
+  input {
+    width: 250px;
+    height: 25px;
+    border-radius: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border: 2px solid transparent;
+    &:focus {
+      border-color: darkorange;
+      outline: none;
+    }
+  }
+}
