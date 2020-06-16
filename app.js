@@ -2,12 +2,16 @@ const mongoose = require('mongoose')
 const config = require('config')
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 
 const PORT = config.get('port') || 5000
 
 // Middlewares
+app.use(cors())
+app.use(express.json({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Routes
