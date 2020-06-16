@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Routes
-app.use('api/user', require('./routes/user'))
+app.use('/api/user', require('./routes/user'))
 
 async function start() {
   try {

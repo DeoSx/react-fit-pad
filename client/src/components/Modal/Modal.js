@@ -7,7 +7,7 @@ import './Modal.scss'
 
 class Modal extends Component {
   state = {
-    name: '',
+    username: '',
     email: '',
     password: ''
   }
@@ -31,7 +31,7 @@ class Modal extends Component {
           <Input
             type="text"
             label="Name"
-            onChange={(event) => this.changeHandler(event.target.value, 'name')}
+            onChange={(event) => this.changeHandler(event.target.value, 'username')}
           />
           <Input
             type="text"

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { model, Schema } = require('mongoose')
 
 const UserSchema = new Schema({
   username: {
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    required: Date.now()
+    default: Date.now()
   }
 })
 
