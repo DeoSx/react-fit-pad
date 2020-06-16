@@ -6,6 +6,7 @@ const router = Router()
 
 const User = require('../models/User')
 
+// /api/user/signup
 router.post(
   '/signup',
   [
@@ -40,6 +41,8 @@ router.post(
 
       await user.save()
 
+      res.status(201).json({ message: 'User created' })
+
       const payload = {
         user: {
           id: user.id
@@ -56,6 +59,7 @@ router.post(
   }
 )
 
+// /api/user/login
 router.post(
   '/login',
   [
