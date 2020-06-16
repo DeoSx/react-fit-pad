@@ -41,13 +41,12 @@ router.post(
 
       await user.save()
 
-      res.status(201).json({ message: 'User created' })
-
       const payload = {
         user: {
           id: user.id
         }
       }
+
       jwt.sign(payload, 'randomString', { expiresIn: 10000 }, (err, token) => {
         if (err) throw err
         res.status(200).json({ token })
