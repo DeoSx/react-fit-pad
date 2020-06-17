@@ -7,6 +7,7 @@ import Button from '../UI/Button/Button'
 import Modal from '../Modal/Modal'
 import './Navigation.scss'
 
+
 import { Wrapper } from '../../styles'
 
 class Navigation extends Component {
