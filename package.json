@@ -4,9 +4,10 @@
   "description": "react gym pad",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon app.js",
+    "server": "cross-env NODE_ENV=production nodemon app.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"yarn client\" \"yarn server\""
+    "client:build": "npm run build --prefix client",
+    "dev": "cross-end NODE_ENV=development concurrently \"yarn client\" \"yarn server\""
   },
   "author": "Damir",
   "license": "ISC",
@@ -25,5 +26,8 @@
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "react-redux": "^7.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
