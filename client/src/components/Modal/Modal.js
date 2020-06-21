@@ -1,19 +1,15 @@
-import React, { Component } from 'react'
-import axios from '../../axios/'
+import React from 'react'
 
 import './Modal.scss'
 
-class Modal extends Component {
+const Modal = (props) => {
 
-  render() {
-    return (
-      <div className="overlay">
-        <div className="modal main-ui">
-          { this.props.children }
-        </div>
-      </div>
-    )
-  }
+  const modal = (
+    <div className="overlay" onClick={(e) => props.close(e)}>
+      <div className="modal main-ui">{props.children}</div>
+    </div>
+  )
+  return props.modalState && modal
 }
 
 export default Modal
