@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { signUp } from '../../store/auth/auth.actions'
+import { signUp, signIn } from '../../store/auth/auth.actions'
 
+import axios from '../../axios'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
 import Modal from '../Modal/Modal'
@@ -19,14 +20,14 @@ class Navigation extends Component {
     loginModal: false
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   changeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  componentDidMount() {
+    console.log(this.props)
   }
 
   showModal = (e) => {
@@ -54,10 +55,11 @@ class Navigation extends Component {
   }
 
   submitHandler = async (data) => {
-    const { loginModal } = this.state
+    const { loginModal, username, password, email } = data
     if (!loginModal) {
       try {
-        await this.props.signUp(data)
+        await this.props.signUp({ username, password, email })
+
         this.setState({
           modalState: false
         })
@@ -66,8 +68,14 @@ class Navigation extends Component {
       }
     } else {
       try {
-        // const res = await axios.post('user/login', data)
-        // console.log('login', res)
+        await this.props.signIn({ email, password })
+        const user = this.props.auth.isAuthenticated
+
+        await axios.get('user/info', {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        })
 
         this.setState({
           modalState: false
@@ -139,7 +147,8 @@ class Navigation extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: (data) => dispatch(signUp(data))
+    signUp: (data) => dispatch(signUp(data)),
+    signIn: (data) => dispatch(signIn(data))
   }
 }
 

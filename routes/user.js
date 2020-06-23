@@ -2,9 +2,11 @@ const { Router } = require('express')
 const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const config = require('config')
 const router = Router()
 
 const User = require('../models/User')
+const authMiddleware = require('../middleware/auth.middleware')
 
 // /api/user/signup
 router.post(
@@ -47,10 +49,15 @@ router.post(
         }
       }
 
-      jwt.sign(payload, 'randomString', { expiresIn: 10000 }, (err, token) => {
-        if (err) throw err
-        res.status(200).json({ token, userId: payload.user.id })
-      })
+      jwt.sign(
+        payload,
+        config.get('stringKey'),
+        { expiresIn: 10000 },
+        (err, token) => {
+          if (err) throw err
+          res.status(200).json({ token, userId: payload.user.id })
+        }
+      )
     } catch (e) {
       console.log(e.message)
       res.status(500).send('Error in saving')
@@ -93,15 +100,31 @@ router.post(
         }
       }
 
-      jwt.sign(payload, 'randomString', { expiresIn: 3600 }, (err, token) => {
-        if (err) throw err
-        return res.json({ token })
-      })
+      jwt.sign(
+        payload,
+        config.get('stringKey'),
+        { expiresIn: 3600 },
+        (err, token) => {
+          if (err) throw err
+          return res.json({ token, userId: payload.user.id })
+        }
+      )
     } catch (e) {
       console.log(e.message)
       res.status(500).send('Server error')
     }
   }
 )
+
+router.get('/info', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId)
+    if (user) {
+      res.json({ user })
+    }
+  } catch (e) {
+    res.status(500).json({ message: 'Something is wrong, try later' })
+  }
+})
 
 module.exports = router
