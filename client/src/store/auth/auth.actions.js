@@ -2,8 +2,6 @@ import axios from '../../axios'
 import { AUTH_SIGNIN, AUTH_SIGNUP } from '../constants'
 
 export function signUp(data) {
-  console.log('async action')
-
   return async (dispatch) => {
     try {
       const res = await axios.post('user/signup', data)
@@ -29,6 +27,7 @@ export function signIn(data) {
       const res = await axios.post('user/login', data)
       await dispatch(signupAction(res.data))
       localStorage.setItem('user', JSON.stringify(res.data))
+      localStorage.setItem('token', JSON.stringify(res.data.token))
     } catch (e) {
       console.error(e)
     }
