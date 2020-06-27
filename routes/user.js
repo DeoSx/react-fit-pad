@@ -118,7 +118,7 @@ router.post(
 
 router.get('/info', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId)
+    const user = await User.findById(req.user.id)
     if (user) {
       res.json({ user })
     }
