@@ -1,7 +1,7 @@
 export default function storage() {
-  if (sessionStorage.getItem('token')) {
-    return sessionStorage.getItem('token')
+  if (sessionStorage.getItem('auth')) {
+    return JSON.parse(sessionStorage.getItem('auth'))
   } else {
-    return localStorage.getItem('token') || ''
+    return JSON.parse(localStorage.getItem('auth')) || ''
   }
 }

@@ -7,6 +7,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import './Layout.scss'
 
 class Layout extends Component {
+
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
     return (

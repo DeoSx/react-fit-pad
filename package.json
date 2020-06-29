@@ -4,10 +4,10 @@
   "description": "react gym pad",
   "main": "index.js",
   "scripts": {
-    "server": "cross-env NODE_ENV=production nodemon app.js",
+    "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "client:build": "npm run build --prefix client",
-    "dev": "cross-env NODE_ENV=development concurrently \"yarn client\" \"yarn server\""
+    "dev": "concurrently \"yarn client\" \"yarn server\""
   },
   "author": "Damir",
   "license": "ISC",
