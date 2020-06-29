@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { signUp, signIn } from '../../store/auth/auth.actions'
+import { signUp, signIn } from '../../store/auth/auth.api'
 
-import axios from '../../axios'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
 import Modal from '../Modal/Modal'
@@ -24,10 +23,6 @@ class Navigation extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-  }
-
-  componentDidMount() {
-    console.log(this.props)
   }
 
   showModal = (e) => {
@@ -69,13 +64,6 @@ class Navigation extends Component {
     } else {
       try {
         await this.props.signIn({ email, password })
-        const user = this.props.auth.isAuthenticated
-
-        await axios.get('user/info', {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        })
 
         this.setState({
           modalState: false
@@ -88,6 +76,8 @@ class Navigation extends Component {
 
   render() {
     const { loginModal, modalState } = this.state
+    const isAuthenticated = this.props.auth.isAuthenticated
+    const { user } = this.props.user
     const modal = (
       <Modal modalState={modalState} close={this.closeModal}>
         {!loginModal && (
@@ -117,6 +107,18 @@ class Navigation extends Component {
       </Modal>
     )
 
+    const authBlock = (
+      <div className="auth-block">
+        <a href="" onClick={(e) => this.showModal(e)}>
+          Sign in
+        </a>
+        /
+        <a href="" onClick={(e) => this.showModal(e)}>
+          Sign up
+        </a>
+      </div>
+    )
+
     return (
       <Wrapper>
         <nav className="nav main-ui">
@@ -127,17 +129,11 @@ class Navigation extends Component {
             <NavLink exact to="/">
               Home
             </NavLink>
-            <NavLink to="/history">History</NavLink>
           </div>
-          <div className="auth-block">
-            <a href="" onClick={(e) => this.showModal(e)}>
-              Sign in
-            </a>
-            /
-            <a href="" onClick={(e) => this.showModal(e)}>
-              Sign up
-            </a>
+          <div>
+            <p>{ user && user.username }</p>
           </div>
+          {!isAuthenticated && authBlock}
         </nav>
         {modal}
       </Wrapper>
@@ -153,7 +149,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
