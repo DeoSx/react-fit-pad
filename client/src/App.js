@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getUser } from './store/user/user.api'
 
 import Home from './pages/Home/Home'
 import History from './pages/History/History'
@@ -12,7 +13,15 @@ import Layout from './hoc/Layout/Layout'
 import './App.scss'
 
 function App(props) {
-  console.log(props)
+
+  const getUserInfo = useCallback(() => {
+    props.getUser()
+  }, [])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [])
+
   const authRoutes = [
     {
       path: '/history',
@@ -50,8 +59,15 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    getUser: () => dispatch(getUser())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
