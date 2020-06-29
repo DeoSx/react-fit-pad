@@ -16,8 +16,8 @@ export function signIn(data) {
     try {
       const res = await axios.post('user/login', data)
       await dispatch(signInAction(res.data))
-      localStorage.setItem('user', JSON.stringify(res.data))
-      localStorage.setItem('token', JSON.stringify(res.data.token))
+      localStorage.setItem('auth', JSON.stringify(res.data))
+      sessionStorage.setItem('auth', JSON.stringify(res.data))
     } catch (e) {
       console.error(e)
     }
