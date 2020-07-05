@@ -7,6 +7,12 @@ export function signInAction(payload) {
   }
 }
 
+export function clearStorages() {
+  localStorage.clear()
+  sessionStorage.clear()
+  logoutAction()
+}
+
 export function logoutAction() {
   return {
     type: AUTH_LOGOUT

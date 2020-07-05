@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp, signIn } from '../../store/auth/auth.api'
+import { getUser } from '../../store/user/user.api'
 
+import Drowdown from '../UI/Dropdown/Dropdown'
 import Input from '../UI/Input/Input'
 import Button from '../UI/Button/Button'
 import Modal from '../Modal/Modal'
@@ -17,6 +19,12 @@ class Navigation extends Component {
     email: '',
     modalState: null,
     loginModal: false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      this.props.getUser()
+    }
   }
 
   changeHandler = (e) => {
@@ -64,7 +72,6 @@ class Navigation extends Component {
     } else {
       try {
         await this.props.signIn({ email, password })
-
         this.setState({
           modalState: false
         })
@@ -130,9 +137,10 @@ class Navigation extends Component {
               Home
             </NavLink>
           </div>
-          <div>
-            <p>{ user && user.username }</p>
-          </div>
+          <Drowdown title={user.username}>
+            <NavLink to="/profile">Profile</NavLink>
+            <a href="">Logout</a>
+          </Drowdown>
           {!isAuthenticated && authBlock}
         </nav>
         {modal}
@@ -144,7 +152,8 @@ class Navigation extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (data) => dispatch(signUp(data)),
-    signIn: (data) => dispatch(signIn(data))
+    signIn: (data) => dispatch(signIn(data)),
+    getUser: () => dispatch(getUser)
   }
 }
 

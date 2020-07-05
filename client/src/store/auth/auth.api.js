@@ -1,6 +1,8 @@
 import axios from '../../axios'
 import { signInAction } from './auth.actions'
 
+import { setStorage } from '../../helpers/storage'
+
 export function signUp(data) {
   return async () => {
     try {
@@ -16,8 +18,9 @@ export function signIn(data) {
     try {
       const res = await axios.post('user/login', data)
       await dispatch(signInAction(res.data))
-      localStorage.setItem('auth', JSON.stringify(res.data))
-      sessionStorage.setItem('auth', JSON.stringify(res.data))
+      const { token, userId, user } = res.data
+      setStorage('auth', { token, userId })
+      setStorage('user', user)
     } catch (e) {
       console.error(e)
     }

@@ -1,0 +1,12 @@
+.dropdown {
+  position: relative;
+  &-content {
+    position: absolute;
+    background: #333;
+    a {
+      &:hover {
+        color: orange;
+      }
+    }
+  }
+}

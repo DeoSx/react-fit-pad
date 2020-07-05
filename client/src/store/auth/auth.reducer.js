@@ -1,7 +1,8 @@
 import { AUTH_SIGNIN, AUTH_LOGOUT } from '../constants'
+import { getStorage } from '../../helpers/storage'
 
 const initialState = {
-  isAuthenticated: JSON.parse(sessionStorage.getItem('auth')) || null
+  isAuthenticated: getStorage('auth') || null
 }
 
 export default function authGymPad(state = initialState, action) {
