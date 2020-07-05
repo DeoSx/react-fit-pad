@@ -93,26 +93,11 @@ router.post(
           message: 'Email or Password is wrong'
         })
       }
-      // const payload = {
-      //   user: {
-      //     id: user.id
-      //   }
-      // }
-
-      // jwt.sign(
-      //   payload,
-      //   config.get('stringKey'),
-      //   { expiresIn: '2h' },
-      //   (err, token) => {
-      //     if (err) throw err
-      //     return res.json({ token, userId: payload.user.id })
-      //   }
-      // )
 
       const token = jwt.sign({ userId: user.id }, config.get('stringKey'), {
         expiresIn: '5h'
       })
-      res.json({ token, userId: user.id })
+      res.json({ token, userId: user.id, user })
       
     } catch (e) {
       console.log(e.message)

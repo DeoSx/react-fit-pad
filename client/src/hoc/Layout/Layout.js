@@ -11,7 +11,7 @@ class Layout extends Component {
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
     return (
-      <div>
+      <>
         <Navigation />
         <Wrapper>
           <main className="layout-main">
@@ -19,7 +19,7 @@ class Layout extends Component {
             {this.props.children}
           </main>
         </Wrapper>
-      </div>
+      </>
     )
   }
 }

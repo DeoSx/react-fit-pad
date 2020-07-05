@@ -1,7 +1,7 @@
 import { USER_INFO } from '../constants'
 
 const initialState = {
-  user: null
+  user: JSON.parse(localStorage.getItem('user')) || null
 }
 
 export default function user(state = initialState, action) {

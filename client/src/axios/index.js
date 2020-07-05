@@ -1,7 +1,7 @@
 import axios from 'axios'
-import storage from './localeAndSessionStorage'
+import { getStorage } from '../helpers/storage'
 
-const auth = storage()
+const auth = getStorage('auth')
 
 const _axios = axios.create({
   baseURL: 'http://localhost:5000/api/',
