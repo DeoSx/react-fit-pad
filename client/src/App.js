@@ -8,19 +8,20 @@ import History from './pages/History/History'
 import Programs from './pages/Programs/Programs'
 import BodySizes from './pages/BodySizes/BodySizes'
 import Excercises from './pages/Excercises/Excercises'
+import Profile from './pages/Profile/Profile'
 
 import Layout from './hoc/Layout/Layout'
 import './App.scss'
 
 function App(props) {
 
-  const getUserInfo = useCallback(() => {
-    props.getUser()
-  }, [])
+  // const getUserInfo = useCallback(() => {
+  //   props.getUser()
+  // }, [])
 
-  useEffect(() => {
-    getUserInfo()
-  }, [])
+  // useEffect(() => {
+  //   getUserInfo()
+  // }, [])
 
   const authRoutes = [
     {
@@ -37,6 +38,11 @@ function App(props) {
       path: '/programs',
       component: Programs,
       id: 3
+    },
+    {
+      path: '/profile',
+      component: Profile,
+      id: 4
     }
   ]
 
