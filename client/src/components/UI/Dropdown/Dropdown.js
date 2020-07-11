@@ -1,16 +1,27 @@
 import React, { useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
 import './Dropdown.scss'
 
 const Dropdown = (props) => {
-  const [active, setActive] = useState(null)
-
-  const drContent = <div className="dropdown-content">{props.children}</div>
+  const [active, setActive] = useState(false)
 
   return (
     <div className="dropdown">
-      <a onClick={() => setActive(true)}>{props.title}</a>
-      {active && drContent}
+      <button
+        className="dropdown__trigger btn-link"
+        onClick={() => (active ? setActive(false) : setActive(true))}
+      >
+        {props.title}
+      </button>
+      <CSSTransition
+        in={active}
+        timeout={300}
+        classNames="transform"
+        unmountOnExit
+      >
+        <div className="dropdown__content main-ui">{props.children}</div>
+      </CSSTransition>
     </div>
   )
 }

@@ -6,7 +6,7 @@
   box-shadow: 1px 17px 26px -2px rgba(0, 0, 0, 0.75);
   color: #fff;
   border-radius: 15px;
-  background: #333;
+  background: linear-gradient(0.55turn, #111, #455, #333);
 }
 
 a {
@@ -17,4 +17,19 @@ a {
 
 .active {
   color: darkorange;
+}
+
+.btn-link {
+  background: transparent;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  transition: all 300ms;
+  cursor: pointer;
+  &:hover {
+    color: darkorange;
+  }
 }
