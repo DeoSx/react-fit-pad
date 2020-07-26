@@ -110,7 +110,6 @@ router.get('/info', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId)
     if (user) {
-      console.log(user)
       res.json({ user })
     }
   } catch (e) {
