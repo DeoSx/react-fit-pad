@@ -1,4 +1,8 @@
-@import './styles/reset.scss';
+@import "./styles/reset.scss";
+
+body {
+  background-color: #f4f3fc;
+}
 
 .main-ui {
   -webkit-box-shadow: 1px 17px 26px -2px rgba(0, 0, 0, 0.75);
@@ -6,7 +10,7 @@
   box-shadow: 1px 17px 26px -2px rgba(0, 0, 0, 0.75);
   color: #fff;
   border-radius: 15px;
-  background: linear-gradient(0.55turn, #111, #455, #333);
+  background: #2f3b57;
 }
 
 a {

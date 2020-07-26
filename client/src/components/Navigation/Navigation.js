@@ -38,10 +38,9 @@ class Navigation extends Component {
     })
   }
 
-  showModal = (e) => {
+  showModal = (e, type) => {
     e.preventDefault()
-    const targetText = e.target.textContent
-    if (targetText.replace(/\s/g, '').includes('up')) {
+    if (type === 'reg') {
       this.setState({
         modalState: true,
         loginModal: false
@@ -119,6 +118,7 @@ class Navigation extends Component {
           onChange={(e) => this.changeHandler(e)}
         />
         <Button
+          styleType={'primary'}
           text={loginModal ? 'Sign in' : 'Sign up'}
           onClick={() => this.submitHandler(this.state)}
         />
@@ -127,11 +127,19 @@ class Navigation extends Component {
 
     const authBlock = (
       <div className="auth-block">
-        <button className="btn-link" href="" onClick={(e) => this.showModal(e)}>
+        <button
+          className="btn-link"
+          href=""
+          onClick={(e) => this.showModal(e, 'login')}
+        >
           Sign in
         </button>
         /
-        <button className="btn-link" href="" onClick={(e) => this.showModal(e)}>
+        <button
+          className="btn-link"
+          href=""
+          onClick={(e) => this.showModal(e, 'reg')}
+        >
           Sign up
         </button>
       </div>
@@ -145,7 +153,7 @@ class Navigation extends Component {
           </div>
           <div className="links">
             <NavLink exact to="/">
-              Home
+              Главная
             </NavLink>
           </div>
           <Drowdown title={user && user.username}>
