@@ -9,6 +9,7 @@ import Programs from './pages/Programs/Programs'
 import BodySizes from './pages/BodySizes/BodySizes'
 import Excercises from './pages/Excercises/Excercises'
 import Profile from './pages/Profile/Profile'
+import CreateDay from './pages/CreateDay/CreateDay'
 
 import Layout from './hoc/Layout/Layout'
 import './App.scss'
@@ -25,34 +26,37 @@ function App(props) {
 
   const authRoutes = [
     {
+      path: '/create',
+      component: CreateDay
+    },
+    {
       path: '/history',
       component: History,
-      id: 1
     },
     {
       path: '/sizes',
       component: BodySizes,
-      id: 2
     },
     {
       path: '/programs',
       component: Programs,
-      id: 3
     },
     {
       path: '/profile',
       component: Profile,
-      id: 4
+    },
+    {
+      path: '/excercises',
+      component: Excercises
     }
   ]
 
   const routes = (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/excercises" component={Excercises} />
       {props.auth.isAuthenticated &&
-        authRoutes.map((route) => (
-          <Route path={route.path} component={route.component} key={route.id} />
+        authRoutes.map((route, i) => (
+          <Route path={route.path} component={route.component} key={i} />
         ))}
     </Switch>
   )
