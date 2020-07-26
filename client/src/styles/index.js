@@ -8,4 +8,12 @@ const Wrapper = styled.section`
   padding-right: 4rem;
 `
 
-export { Wrapper }
+const FormWrapper = styled.form`
+  padding: 25px;
+  width: 350px;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 5px;
+`
+
+export { Wrapper, FormWrapper }
