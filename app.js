@@ -17,6 +17,7 @@ app.use(bodyParser.json())
 
 // Routes
 app.use('/api/user', require('./routes/user'))
+app.use('/api/excercise', require('./routes/excercise'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.resolve(__dirname, 'client', 'build')))

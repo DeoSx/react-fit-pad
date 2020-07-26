@@ -1,5 +1,6 @@
 import axios from '../../axios'
 import { signInAction } from './auth.actions'
+import { getUser } from '../user/user.api'
 
 import { setStorage } from '../../helpers/storage'
 
@@ -18,9 +19,9 @@ export function signIn(data) {
     try {
       const res = await axios.post('user/login', data)
       await dispatch(signInAction(res.data))
-      const { token, userId, user } = res.data
+      const { token, userId } = res.data
       setStorage('auth', { token, userId })
-      setStorage('user', user)
+      dispatch(getUser())
     } catch (e) {
       console.error(e)
     }

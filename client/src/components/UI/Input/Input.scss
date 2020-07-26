@@ -1,22 +1,32 @@
 .input-group {
+  width: 100%;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   label {
+    font-size: 14px;
+    color: #8991a3;
+    padding-left: 7px;
+    align-self: start;
     margin-bottom: 5px;
   }
   input {
-    width: 250px;
-    height: 25px;
-    border-radius: 15px;
+    width: 95%;
+    height: 35px;
+    border-radius: 5px;
     padding-left: 7px;
     padding-right: 7px;
-    border: 2px solid transparent;
+    border: 2px solid #8991a3;
+    transition: 0.2s;
+    font-size: 16px;
     &:focus {
-      border-color: darkorange;
+      border-color: #2496ff;
       outline: none;
+    }
+    &:hover {
+      border-color: #2496ff;
     }
   }
 }

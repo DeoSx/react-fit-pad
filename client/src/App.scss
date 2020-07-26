@@ -1,4 +1,8 @@
-@import './styles/reset.scss';
+@import "./styles/reset.scss";
+
+body {
+  background-color: #f4f3fc;
+}
 
 .main-ui {
   -webkit-box-shadow: 1px 17px 26px -2px rgba(0, 0, 0, 0.75);
@@ -6,7 +10,7 @@
   box-shadow: 1px 17px 26px -2px rgba(0, 0, 0, 0.75);
   color: #fff;
   border-radius: 15px;
-  background: #333;
+  background: #2f3b57;
 }
 
 a {
@@ -17,4 +21,19 @@ a {
 
 .active {
   color: darkorange;
+}
+
+.btn-link {
+  background: transparent;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  transition: all 300ms;
+  cursor: pointer;
+  &:hover {
+    color: darkorange;
+  }
 }

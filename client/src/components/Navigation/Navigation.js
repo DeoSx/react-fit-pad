@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp, signIn } from '../../store/auth/auth.api'
+import { logout } from '../../store/auth/auth.actions'
 import { getUser } from '../../store/user/user.api'
 
 import Drowdown from '../UI/Dropdown/Dropdown'
@@ -21,8 +22,12 @@ class Navigation extends Component {
     loginModal: false
   }
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
+    if (this.props.user.user !== prevProps.user.user) {
       this.props.getUser()
     }
   }
@@ -33,10 +38,9 @@ class Navigation extends Component {
     })
   }
 
-  showModal = (e) => {
+  showModal = (e, type) => {
     e.preventDefault()
-    const targetText = e.target.textContent
-    if (targetText.replace(/\s/g, '').includes('up')) {
+    if (type === 'reg') {
       this.setState({
         modalState: true,
         loginModal: false
@@ -62,7 +66,7 @@ class Navigation extends Component {
     if (!loginModal) {
       try {
         await this.props.signUp({ username, password, email })
-
+        await this.props.getUser()
         this.setState({
           modalState: false
         })
@@ -72,6 +76,7 @@ class Navigation extends Component {
     } else {
       try {
         await this.props.signIn({ email, password })
+        await this.props.getUser()
         this.setState({
           modalState: false
         })
@@ -79,6 +84,11 @@ class Navigation extends Component {
         console.error(e)
       }
     }
+  }
+
+  logoutHandler = () => {
+    this.props.logout()
+    window.location.reload(true)
   }
 
   render() {
@@ -108,6 +118,7 @@ class Navigation extends Component {
           onChange={(e) => this.changeHandler(e)}
         />
         <Button
+          styleType={'primary'}
           text={loginModal ? 'Sign in' : 'Sign up'}
           onClick={() => this.submitHandler(this.state)}
         />
@@ -116,13 +127,21 @@ class Navigation extends Component {
 
     const authBlock = (
       <div className="auth-block">
-        <a href="" onClick={(e) => this.showModal(e)}>
+        <button
+          className="btn-link"
+          href=""
+          onClick={(e) => this.showModal(e, 'login')}
+        >
           Sign in
-        </a>
+        </button>
         /
-        <a href="" onClick={(e) => this.showModal(e)}>
+        <button
+          className="btn-link"
+          href=""
+          onClick={(e) => this.showModal(e, 'reg')}
+        >
           Sign up
-        </a>
+        </button>
       </div>
     )
 
@@ -134,12 +153,16 @@ class Navigation extends Component {
           </div>
           <div className="links">
             <NavLink exact to="/">
-              Home
+              Главная
             </NavLink>
           </div>
-          <Drowdown title={user.username}>
-            <NavLink to="/profile">Profile</NavLink>
-            <a href="">Logout</a>
+          <Drowdown title={user && user.username}>
+            <NavLink className="btn-link" to="/profile">
+              Profile
+            </NavLink>
+            <button className="btn-link" onClick={() => this.logoutHandler()}>
+              Logout
+            </button>
           </Drowdown>
           {!isAuthenticated && authBlock}
         </nav>
@@ -153,7 +176,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (data) => dispatch(signUp(data)),
     signIn: (data) => dispatch(signIn(data)),
-    getUser: () => dispatch(getUser)
+    getUser: () => dispatch(getUser),
+    logout: () => dispatch(logout)
   }
 }
 

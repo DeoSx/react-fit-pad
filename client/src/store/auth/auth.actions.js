@@ -7,7 +7,7 @@ export function signInAction(payload) {
   }
 }
 
-export function clearStorages() {
+export function logout() {
   localStorage.clear()
   sessionStorage.clear()
   logoutAction()
