@@ -8,7 +8,7 @@ router.post('/create', async (req, res) => {
   const { name, idOfMuscleType } = req.body
 
   try {
-    let excercise = await new Excercise.findOne({ name })
+    let excercise = await Excercise.findOne({ name })
 
     if (excercise) {
       return res.status(400).json('Excercise already exists')
@@ -40,7 +40,7 @@ router.get('', async (req, res) => {
     
   } catch (e) {
     console.error(e)
-    res.status(500).json('Cant get data')
+    res.status(500).json(`Can't get data`)
   }
 })
 

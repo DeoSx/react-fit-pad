@@ -5,7 +5,7 @@ const Excercise = new Schema({
     type: String,
     required: true
   },
-  idOfTypeMuscle: {
+  idOfMuscleType: {
     type: Number,
     required: true
   }

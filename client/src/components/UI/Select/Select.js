@@ -3,12 +3,13 @@ import { CSSTransition } from 'react-transition-group'
 
 import './Select.scss'
 
-const Select = ({ title, items }) => {
+const Select = ({ title, items, handler }) => {
   const [selected, setSelected] = useState(title)
   const [showList, setShowList] = useState(null)
 
-  const selectHandler = (value) => {
-    setSelected(value)
+  const selectHandler = (item) => {
+    setSelected(item.name)
+    handler(item)
     setShowList(!showList)
   }
 
@@ -30,7 +31,7 @@ const Select = ({ title, items }) => {
         <ul>
           {items &&
             items.map((item, i) => (
-              <li key={i} onClick={() => selectHandler(item.name)}>
+              <li key={i} onClick={() => selectHandler(item)}>
                 {item.name}
               </li>
             ))}
