@@ -18,7 +18,7 @@ const Select = ({ title, items, handler }) => {
       <div className="selected" onClick={() => setShowList(!showList)}>
         {selected}
         <span>
-          <img src="./images/icons/arrow-down.svg" />
+          <img src="./images/icons/arrow-down.svg" alt="" />
         </span>
       </div>
 

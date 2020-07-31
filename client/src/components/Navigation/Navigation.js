@@ -22,10 +22,6 @@ class Navigation extends Component {
     loginModal: false
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   componentDidUpdate(prevProps) {
     if (this.props.user.user !== prevProps.user.user) {
       this.props.getUser()
