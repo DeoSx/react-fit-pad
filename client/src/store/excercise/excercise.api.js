@@ -14,10 +14,8 @@ export function createExcercise(data) {
 export function getAll() {
   return async (dispatch) => {
     try {
-      console.log('before')
       const res = await axios.get('excercise')
-      console.log(res)
-      await dispatch(getAllAction(res))
+      await dispatch(getAllAction(res.data))
     } catch (e) {
       console.error(e)
     }

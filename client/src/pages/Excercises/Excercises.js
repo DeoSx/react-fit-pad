@@ -33,27 +33,28 @@ const mockData = [
 const Excercises = (props) => {
   const dispatch = useDispatch()
   const [selected, setSelected] = useState(null)
-  const [input, setInput] = useState(null)
+  const [input, setInput] = useState('')
+  const [disabled, setDisabled] = useState(null)
 
   useEffect(() => {
     dispatch(props.getAll())
-
-    console.log(props)
   }, [])
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
-
+    setDisabled(true)
     const data = {
       name: input,
       idOfMuscleType: selected.idOfMuscleType
     }
-    props.createExcercise(data)
+    await props.createExcercise(data)
+    setDisabled(null)
+    setInput('')
   }
 
   return (
     <section className="section">
-      <h1>Create</h1>
+      <h1>Упражнения</h1>
 
       <FormWrapper onSubmit={(e) => submitHandler(e)}>
         <Select
@@ -63,9 +64,10 @@ const Excercises = (props) => {
         />
         <Input
           label="Название упражнения"
+          value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button text={'Создать'} styleType={'primary'} />
+        <Button text={'Создать'} styleType={'primary'} disabled={disabled} />
       </FormWrapper>
     </section>
   )
