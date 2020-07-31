@@ -12,12 +12,12 @@ export function createExcercise(data) {
 }
 
 export function getAll() {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       console.log('before')
       const res = await axios.get('excercise')
-      await dispatch(getAllAction(res))
       console.log(res)
+      await dispatch(getAllAction(res))
     } catch (e) {
       console.error(e)
     }

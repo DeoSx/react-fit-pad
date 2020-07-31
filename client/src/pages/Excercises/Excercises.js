@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { createExcercise, getAll } from '../../store/excercise/excercise.api'
 
 import { FormWrapper } from '../../styles'
@@ -31,13 +31,15 @@ const mockData = [
 ]
 
 const Excercises = (props) => {
+  const dispatch = useDispatch()
   const [selected, setSelected] = useState(null)
   const [input, setInput] = useState(null)
 
   useEffect(() => {
-    props.getAllExc()
+    dispatch(props.getAll())
+
     console.log(props)
-  },)
+  }, [])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -78,7 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createExcercise: (data) => dispatch(createExcercise(data)),
-    getAllExc: () => dispatch(getAll)
+    getAll: () => dispatch(getAll)
   }
 }
 

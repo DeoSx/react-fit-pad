@@ -15,12 +15,12 @@ router.post('/create', async (req, res) => {
     }
 
     excercise = new Excercise({
-      name, idOfMuscleType
+      name,
+      idOfMuscleType
     })
 
     await excercise.save()
     return res.status(201).json(excercise)
-
   } catch (e) {
     console.error(e.message)
     res.status(500).send('Error with creating excercise')
@@ -29,15 +29,13 @@ router.post('/create', async (req, res) => {
 
 // /api/excercise
 router.get('', async (req, res) => {
+  let excercises = await Excercise.find({})
   try {
-    let excercise = await Excercise.find({})
-
-    if(!excercise) {
+    if (!excercises) {
       return res.status(400).json('No excercises')
     }
 
-    return res.json(excercise)
-    
+    return res.json(excercises)
   } catch (e) {
     console.error(e)
     res.status(500).json(`Can't get data`)
