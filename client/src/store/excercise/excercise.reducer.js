@@ -1,7 +1,7 @@
 import { EXCERCISE_GETALL } from '../constants'
 
 const initialState = {
-  excercises: []
+  data: []
 }
 
 export default function excerciseReducer(state = initialState, action) {
@@ -9,7 +9,7 @@ export default function excerciseReducer(state = initialState, action) {
     case EXCERCISE_GETALL:
       return {
         ...state,
-        excercises: action.payload
+        data: action.payload
       }
     default:
       return state

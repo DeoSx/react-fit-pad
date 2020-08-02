@@ -23,32 +23,3 @@
     }
   }
 }
-
-.transform-enter {
-  opacity: 0;
-  transform: translateY(-20px) scale(0.2);
-  // transform: scale(0.2);
-}
-
-.transform-enter-active {
-  transform: translateY(20px) scale(1);
-  // transform: scale(1);
-  opacity: 1;
-  transition: transform 200ms, opacity 200ms;
-}
-
-.transform-enter-done {
-  transform: translateY(20px);
-  opacity: 1;
-}
-
-.transform-exit {
-  transform: translateY(20px);
-  opacity: 1;
-}
-
-.transform-exit-active {
-  transform: translateY(-20px) scale(0.3);
-  opacity: 0;
-  transition: all 200ms;
-}
