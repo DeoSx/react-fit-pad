@@ -5,7 +5,7 @@ const Excercise = require('../models/Excercise')
 
 // /api/excercise/create
 router.post('/create', async (req, res) => {
-  const { name, idOfMuscleType } = req.body
+  const { name, idOfMuscleType, nameOfMuscleType } = req.body
 
   try {
     let excercise = await Excercise.findOne({ name })
@@ -16,7 +16,8 @@ router.post('/create', async (req, res) => {
 
     excercise = new Excercise({
       name,
-      idOfMuscleType
+      idOfMuscleType,
+      nameOfMuscleType
     })
 
     await excercise.save()
@@ -35,7 +36,35 @@ router.get('', async (req, res) => {
       return res.status(400).json('No excercises')
     }
 
-    return res.json(excercises)
+    let muscleTypes = excercises
+      .map((item) => {
+        return {
+          id: item.idOfMuscleType,
+          name: item.nameOfMuscleType
+        }
+      })
+      .sort((a, b) => a.id - b.id)
+
+    muscleTypes = muscleTypes.filter(
+      (item, i) =>
+        item.id !== (!muscleTypes[i - 1] ? null : muscleTypes[i - 1].id)
+    )
+
+    const data = muscleTypes.map((i) => {
+      const dataObj = {
+        id: i.id,
+        name: i.name,
+        excercises: []
+      }
+      excercises.map((item) => {
+        if (item.idOfMuscleType === i.id) {
+          dataObj.excercises.push(item)
+        }
+      })
+      return dataObj
+    })
+
+    return res.json(data)
   } catch (e) {
     console.error(e)
     res.status(500).json(`Can't get data`)
