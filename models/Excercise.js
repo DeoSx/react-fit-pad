@@ -8,6 +8,10 @@ const Excercise = new Schema({
   idOfMuscleType: {
     type: Number,
     required: true
+  },
+  nameOfMuscleType: {
+    type: String,
+    required: true
   }
 })
 

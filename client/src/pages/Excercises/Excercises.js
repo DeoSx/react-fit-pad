@@ -6,6 +6,7 @@ import { FormWrapper } from '../../styles'
 import Select from '../../components/UI/Select/Select'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
+import Accordion from '../../components/pages/Excercises/Accordion/Accordion'
 
 const mockData = [
   {
@@ -45,9 +46,11 @@ const Excercises = (props) => {
     setDisabled(true)
     const data = {
       name: input,
-      idOfMuscleType: selected.idOfMuscleType
+      idOfMuscleType: selected.idOfMuscleType,
+      nameOfMuscleType: selected.name
     }
     await props.createExcercise(data)
+    await props.getAll()
     setDisabled(null)
     setInput('')
   }
@@ -69,6 +72,10 @@ const Excercises = (props) => {
         />
         <Button text={'Создать'} styleType={'primary'} disabled={disabled} />
       </FormWrapper>
+
+      {props.excercise.data.map((item) => (
+        <Accordion key={item.id} title={item.name} items={item.excercises} />
+      ))}
     </section>
   )
 }
