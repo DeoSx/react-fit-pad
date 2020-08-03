@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUser } from './store/user/user.api'
@@ -15,14 +15,6 @@ import Layout from './hoc/Layout/Layout'
 import './App.scss'
 
 function App(props) {
-
-  // const getUserInfo = useCallback(() => {
-  //   props.getUser()
-  // }, [])
-
-  // useEffect(() => {
-  //   getUserInfo()
-  // }, [])
 
   const authRoutes = [
     {

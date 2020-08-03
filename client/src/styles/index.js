@@ -10,7 +10,7 @@ const Wrapper = styled.section`
 
 const FormWrapper = styled.form`
   padding: 25px;
-  width: 350px;
+  width: 100%;
   max-width: 600px;
   background-color: #ffffff;
   border-radius: 5px;

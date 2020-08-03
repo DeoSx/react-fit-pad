@@ -10,7 +10,7 @@ const Dropdown = (props) => {
     <div className="dropdown">
       <button
         className="dropdown__trigger btn-link"
-        onClick={() => (active ? setActive(false) : setActive(true))}
+        onClick={() => (setActive(!active))}
       >
         {props.title}
       </button>

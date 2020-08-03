@@ -1,0 +1,86 @@
+.accordion {
+  padding: 15px;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 5px;
+  transition: 0.3s;
+  &__title {
+    padding: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    span {
+      display: block;
+      height: 30px;
+      width: 30px;
+      transition: 0.2s;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      &.active {
+        transform: rotate(-180deg);
+      }
+    }
+    &::before {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      height: 3px;
+      width: 0;
+      transition: 0.6s;
+      background: #31a0ef;
+    }
+    &:hover {
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+  &__items {
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 6px;
+      font-style: italic;
+      display: flex;
+      flex-direction: column;
+      .item__content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          margin: 0;
+        }
+        .icons {
+          width: 70px;
+          display: flex;
+          justify-content: space-between;
+          span {
+            display: block;
+            text-align: center;
+            padding: 5px;
+            width: 18px;
+            border: 1px solid #d7e0f9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+          .edit {
+            &:hover {
+              border-color: #31a0ef;
+            }
+          }
+          .delete {
+            &:hover {
+              border-color: #f75566;
+            }
+          }
+        }
+      }
+    }
+  }
+}

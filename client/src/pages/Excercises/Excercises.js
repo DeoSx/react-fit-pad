@@ -1,53 +1,96 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { createExcercise, getAll } from '../../store/excercise/excercise.api'
 
 import { FormWrapper } from '../../styles'
 import Select from '../../components/UI/Select/Select'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
+import Accordion from '../../components/pages/Excercises/Accordion/Accordion'
 
 const mockData = [
   {
     name: 'Грудь',
-    idOfTypeMuscle: '1'
+    idOfMuscleType: '1'
   },
   {
     name: 'Ноги',
-    idOfTypeMuscle: '2'
+    idOfMuscleType: '2'
   },
   {
     name: 'Спина',
-    idOfTypeMuscle: '3'
+    idOfMuscleType: '3'
   },
   {
     name: 'Руки',
-    idOfTypeMuscle: '4'
+    idOfMuscleType: '4'
   },
   {
     name: 'Плечи',
-    idOfTypeMuscle: '5'
+    idOfMuscleType: '5'
   }
 ]
 
-const Excercises = () => {
-  const submitHandler = (e) => {
+const Excercises = (props) => {
+  const dispatch = useDispatch()
+  const [selected, setSelected] = useState(null)
+  const [input, setInput] = useState('')
+  const [disabled, setDisabled] = useState(null)
+
+  useEffect(() => {
+    dispatch(props.getAll())
+  }, [])
+
+  const submitHandler = async (e) => {
     e.preventDefault()
-    console.log('submit')
+    setDisabled(true)
+    const data = {
+      name: input,
+      idOfMuscleType: selected.idOfMuscleType,
+      nameOfMuscleType: selected.name
+    }
+    await props.createExcercise(data)
+    await props.getAll()
+    setDisabled(null)
+    setInput('')
   }
 
   return (
     <section className="section">
-      <h1>Create</h1>
+      <h1>Упражнения</h1>
 
       <FormWrapper onSubmit={(e) => submitHandler(e)}>
-        <Select title="Выбрать мышечную группу" items={mockData} />
-        <Input label="Название упражнения" />
-        <Button text={'Создать'} styleType={'primary'} />
+        <Select
+          title="Выбрать мышечную группу"
+          items={mockData}
+          handler={setSelected}
+        />
+        <Input
+          label="Название упражнения"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <Button text={'Создать'} styleType={'primary'} disabled={disabled} />
       </FormWrapper>
+
+      {props.excercise.data.map((item) => (
+        <Accordion key={item.id} title={item.name} items={item.excercises} />
+      ))}
     </section>
   )
 }
 
-const mapDispatchToProps = () => {}
+const mapStateToProps = (state) => {
+  return {
+    excercise: state.excercise
+  }
+}
 
-export default connect(null, mapDispatchToProps)(Excercises)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createExcercise: (data) => dispatch(createExcercise(data)),
+    getAll: () => dispatch(getAll)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Excercises)
