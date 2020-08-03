@@ -71,4 +71,20 @@ router.get('', async (req, res) => {
   }
 })
 
+// /api/excercise
+router.put('', async (req, res) => {
+  if (!req.body) return res.status(400).json('No content')
+
+  const excercise = req.body
+  try {
+    await Excercise.findOneAndUpdate({ _id: excercise._id }, excercise, {
+      new: true
+    })
+    res.send(excercise)
+  } catch (e) {
+    console.error(e)
+    res.status(500).json('Try later')
+  }
+})
+
 module.exports = router
