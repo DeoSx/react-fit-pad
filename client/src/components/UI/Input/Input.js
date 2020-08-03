@@ -14,7 +14,7 @@ const Input = (props) => {
         name={props.name}
         onChange={props.onChange}
         placeholder={placeholder}
-        value={props.value && props.value}
+        value={props.value}
       />
     </div>
   )

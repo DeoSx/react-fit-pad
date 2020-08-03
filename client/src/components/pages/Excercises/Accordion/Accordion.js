@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import './Accordion.scss'
+import Item from './Item'
 
 const Accordion = ({ title, items }) => {
   const [active, setActive] = useState(false)
@@ -16,20 +17,9 @@ const Accordion = ({ title, items }) => {
       </div>
       <CSSTransition in={active} timeout={300} classNames="fade" unmountOnExit>
         <ul className="accordion__items">
-          {items &&
-            items.map((item, i) => (
-              <li key={i}>
-                <div>{item.name}</div>
-                <div className="icons">
-                  <span className="edit">
-                    <img src="./images/icons/edit.svg" />
-                  </span>
-                  <span className="delete">
-                    <img src="./images/icons/delete.svg" />
-                  </span>
-                </div>
-              </li>
-            ))}
+          {items.map((item) => (
+            <Item key={item._id} item={item} />
+          ))}
         </ul>
       </CSSTransition>
     </div>
