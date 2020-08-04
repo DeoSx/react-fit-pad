@@ -6,7 +6,7 @@ import { FormWrapper } from '../../styles'
 import Select from '../../components/UI/Select/Select'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
-import Accordion from '../../components/pages/Excercises/Accordion/Accordion'
+import Accordion from './components/Accordion'
 
 const mockData = [
   {
@@ -70,7 +70,11 @@ const Excercises = (props) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button text={'Создать'} styleType={'primary'} disabled={disabled} />
+        <Button
+          text={'Создать'}
+          styleType={'primary'}
+          disabled={!selected || !input ? true : false}
+        />
       </FormWrapper>
 
       {props.excercise.data.map((item) => (

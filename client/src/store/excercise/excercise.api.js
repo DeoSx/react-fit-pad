@@ -21,3 +21,14 @@ export function getAll() {
     }
   }
 }
+
+export function changeExcercise(data) {
+  return async (dispatch) => {
+    try {
+      await axios.put('excercise', data)
+      dispatch(getAll())
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}

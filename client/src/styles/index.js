@@ -6,6 +6,11 @@ const Wrapper = styled.section`
   margin: 0 auto;
   padding-left: 4rem;
   padding-right: 4rem;
+  box-sizing: border-box;
+  @media (max-width: 1024px) {
+    max-width: 90%;
+    padding: 0 15px;
+  }
 `
 
 const FormWrapper = styled.form`

@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
-import './Accordion.scss'
+import { changeExcercise } from '../../../store/excercise/excercise.api'
 import Item from './Item'
+import './index.scss'
 
-const Accordion = ({ title, items }) => {
+const Accordion = ({ title, items, changeExcercise, getAll }) => {
   const [active, setActive] = useState(false)
+
+  const changeHandler = (e, data) => {
+    e.preventDefault()
+    changeExcercise(data)
+  }
 
   return (
     <div className="accordion">
@@ -18,7 +25,7 @@ const Accordion = ({ title, items }) => {
       <CSSTransition in={active} timeout={300} classNames="fade" unmountOnExit>
         <ul className="accordion__items">
           {items.map((item) => (
-            <Item key={item._id} item={item} />
+            <Item key={item._id} item={item} changeHandler={changeHandler} />
           ))}
         </ul>
       </CSSTransition>
@@ -26,4 +33,10 @@ const Accordion = ({ title, items }) => {
   )
 }
 
-export default Accordion
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeExcercise: (data) => dispatch(changeExcercise(data))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Accordion)
