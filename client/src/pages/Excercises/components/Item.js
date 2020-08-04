@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-import Input from '../../../UI/Input/Input'
+import Input from '../../../components/UI/Input/Input'
 
 const Item = (props) => {
+  const { changeHandler } = props
   const { name } = props.item
   const [form, setForm] = useState(false)
   const [input, setInput] = useState(name)
@@ -21,7 +22,9 @@ const Item = (props) => {
         </div>
       </div>
       {form && (
-        <form>
+        <form
+          onSubmit={(e) => changeHandler(e, { ...props.item, name: input })}
+        >
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
         </form>
       )}
