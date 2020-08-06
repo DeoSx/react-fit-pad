@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
+
 import { signUp, signIn } from '../../store/auth/auth.api'
 import { logout } from '../../store/auth/auth.actions'
 import { getUser } from '../../store/user/user.api'
@@ -92,33 +94,35 @@ class Navigation extends Component {
     const isAuthenticated = this.props.auth.isAuthenticated
     const { user } = this.props.user
     const modal = (
-      <Modal modalState={modalState} close={this.closeModal}>
-        {!loginModal && (
+      <CSSTransition in={modalState} timeout={200} classNames="fade">
+        <Modal modalState={modalState} close={this.closeModal}>
+          {!loginModal && (
+            <Input
+              type="text"
+              label="Name"
+              name="username"
+              onChange={(e) => this.changeHandler(e)}
+            />
+          )}
           <Input
             type="text"
-            label="Name"
-            name="username"
+            label="Email"
+            name="email"
             onChange={(e) => this.changeHandler(e)}
           />
-        )}
-        <Input
-          type="text"
-          label="Email"
-          name="email"
-          onChange={(e) => this.changeHandler(e)}
-        />
-        <Input
-          type="password"
-          label="Password"
-          name="password"
-          onChange={(e) => this.changeHandler(e)}
-        />
-        <Button
-          styleType={'primary'}
-          text={loginModal ? 'Sign in' : 'Sign up'}
-          onClick={() => this.submitHandler(this.state)}
-        />
-      </Modal>
+          <Input
+            type="password"
+            label="Password"
+            name="password"
+            onChange={(e) => this.changeHandler(e)}
+          />
+          <Button
+            styleType={'primary'}
+            text={loginModal ? 'Sign in' : 'Sign up'}
+            onClick={() => this.submitHandler(this.state)}
+          />
+        </Modal>
+      </CSSTransition>
     )
 
     const authBlock = (

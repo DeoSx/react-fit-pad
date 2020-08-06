@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
 
 import Input from '../../../components/UI/Input/Input'
+import Modal from '../../../components/Modal/Modal'
+import ConfirmModal from '../../../components/Modal/confirm'
 
 const Item = (props) => {
   const { changeHandler } = props
   const { name } = props.item
-  const [form, setForm] = useState(false)
+  const [form, setForm] = useState(null)
   const [input, setInput] = useState(name)
+  const [modalState, setModalState] = useState(false)
+
+  const closeModal = (e) => {
+    if (e.target.classList.contains('overlay')) {
+      setModalState(false)
+    }
+  }
 
   return (
     <li>
@@ -14,10 +23,10 @@ const Item = (props) => {
         <p>{name}</p>
         <div className="icons">
           <span className="edit" onClick={() => setForm(!form)}>
-            <img src="./images/icons/edit.svg" />
+            <img src="./images/icons/edit.svg" alt="" />
           </span>
-          <span className="delete">
-            <img src="./images/icons/delete.svg" />
+          <span className="delete" onClick={() => setModalState(true)}>
+            <img src="./images/icons/delete.svg" alt="" />
           </span>
         </div>
       </div>
@@ -28,6 +37,13 @@ const Item = (props) => {
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
         </form>
       )}
+      <Modal modalState={modalState} close={closeModal}>
+        <ConfirmModal
+          question="Удалить из списка?"
+          title={name}
+          close={setModalState}
+        />
+      </Modal>
     </li>
   )
 }
