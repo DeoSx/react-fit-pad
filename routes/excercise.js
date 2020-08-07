@@ -87,4 +87,14 @@ router.put('', async (req, res) => {
   }
 })
 
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const excercise = await Excercise.findByIdAndDelete({ _id: req.params.id })
+    res.send(excercise)
+  } catch (e) {
+    console.error(e)
+    return res.status(500).json('Something wrong. Try later.')
+  }
+})
+
 module.exports = router
