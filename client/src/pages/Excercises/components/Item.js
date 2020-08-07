@@ -5,7 +5,7 @@ import Modal from '../../../components/Modal/Modal'
 import ConfirmModal from '../../../components/Modal/confirm'
 
 const Item = (props) => {
-  const { changeHandler } = props
+  const { changeHandler, deleteHandler } = props
   const { name } = props.item
   const [form, setForm] = useState(null)
   const [input, setInput] = useState(name)
@@ -15,6 +15,13 @@ const Item = (props) => {
     if (e.target.classList.contains('overlay')) {
       setModalState(false)
     }
+  }
+
+  const deleteItem = () => {
+    const id = props.item._id
+    deleteHandler(id)
+    console.log(id)
+    setModalState(false)
   }
 
   return (
@@ -42,6 +49,7 @@ const Item = (props) => {
           question="Удалить из списка?"
           title={name}
           close={setModalState}
+          callback={deleteItem}
         />
       </Modal>
     </li>

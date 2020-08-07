@@ -2,9 +2,10 @@ import axios from '../../axios'
 import { getAllAction } from './excercise.actions'
 
 export function createExcercise(data) {
-  return async () => {
+  return async (dispatch) => {
     try {
       await axios.post('excercise/create', data)
+      dispatch(getAll())
     } catch (e) {
       console.error(e)
     }
@@ -27,6 +28,18 @@ export function changeExcercise(data) {
     try {
       await axios.put('excercise', data)
       dispatch(getAll())
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}
+
+export function deleteExcercise(id) {
+  return async (dispatch) => {
+    try {
+      const res = await axios.delete(`excercise/delete/${id}`)
+      dispatch(getAll())
+      console.log(res)
     } catch (e) {
       console.error(e)
     }
