@@ -9,7 +9,7 @@ import Programs from './pages/Programs/Programs'
 import BodySizes from './pages/BodySizes/BodySizes'
 import Excercises from './pages/Excercises/Excercises'
 import Profile from './pages/Profile/Profile'
-import CreateDay from './pages/CreateDay/CreateDay'
+import Journal from './pages/Journal'
 
 import Layout from './hoc/Layout/Layout'
 import './App.scss'
@@ -18,8 +18,8 @@ function App(props) {
 
   const authRoutes = [
     {
-      path: '/create',
-      component: CreateDay
+      path: '/journal',
+      component: Journal
     },
     {
       path: '/history',

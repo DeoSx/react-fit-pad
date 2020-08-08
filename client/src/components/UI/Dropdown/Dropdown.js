@@ -8,12 +8,12 @@ const Dropdown = (props) => {
 
   return (
     <div className="dropdown">
-      <button
+      <a
         className="dropdown__trigger btn-link"
         onClick={() => (setActive(!active))}
       >
         {props.title}
-      </button>
+      </a>
       <CSSTransition
         in={active}
         timeout={300}
