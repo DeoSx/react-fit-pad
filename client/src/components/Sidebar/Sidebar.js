@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar main-ui">
       <NavLink exact to="/journal">
-        Новая тренировка
+        Журнал
       </NavLink>
       <NavLink exact to="/history">
         История

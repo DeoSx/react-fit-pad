@@ -117,7 +117,7 @@ class Navigation extends Component {
             onChange={(e) => this.changeHandler(e)}
           />
           <Button
-            styleType={'primary'}
+            styleType="blue"
             text={loginModal ? 'Sign in' : 'Sign up'}
             onClick={() => this.submitHandler(this.state)}
           />
@@ -127,21 +127,13 @@ class Navigation extends Component {
 
     const authBlock = (
       <div className="auth-block">
-        <button
-          className="btn-link"
-          href=""
-          onClick={(e) => this.showModal(e, 'login')}
-        >
+        <a className="btn-link" onClick={(e) => this.showModal(e, 'login')}>
           Sign in
-        </button>
+        </a>
         /
-        <button
-          className="btn-link"
-          href=""
-          onClick={(e) => this.showModal(e, 'reg')}
-        >
+        <a className="btn-link" onClick={(e) => this.showModal(e, 'reg')}>
           Sign up
-        </button>
+        </a>
       </div>
     )
 
@@ -160,9 +152,9 @@ class Navigation extends Component {
             <NavLink className="btn-link" to="/profile">
               Profile
             </NavLink>
-            <button className="btn-link" onClick={() => this.logoutHandler()}>
+            <a className="btn-link" onClick={() => this.logoutHandler()}>
               Logout
-            </button>
+            </a>
           </Drowdown>
           {!isAuthenticated && authBlock}
         </nav>
