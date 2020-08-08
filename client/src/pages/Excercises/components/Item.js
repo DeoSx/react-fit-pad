@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
 import Input from '../../../components/UI/Input/Input'
 import Modal from '../../../components/Modal/Modal'
@@ -20,7 +21,6 @@ const Item = (props) => {
   const deleteItem = () => {
     const id = props.item._id
     deleteHandler(id)
-    console.log(id)
     setModalState(false)
   }
 
@@ -44,14 +44,16 @@ const Item = (props) => {
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
         </form>
       )}
-      <Modal modalState={modalState} close={closeModal}>
-        <ConfirmModal
-          question="Удалить из списка?"
-          title={name}
-          close={setModalState}
-          callback={deleteItem}
-        />
-      </Modal>
+      <CSSTransition in={modalState} timeout={200} classNames="fade">
+        <Modal modalState={modalState} close={closeModal}>
+          <ConfirmModal
+            question="Удалить из списка?"
+            title={name}
+            close={setModalState}
+            callback={deleteItem}
+          />
+        </Modal>
+      </CSSTransition>
     </li>
   )
 }

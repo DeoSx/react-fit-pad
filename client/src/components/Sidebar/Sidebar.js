@@ -5,7 +5,7 @@ import './Sidebar.scss'
 const Sidebar = () => {
   return (
     <div className="sidebar main-ui">
-      <NavLink exact to="/create">
+      <NavLink exact to="/journal">
         Новая тренировка
       </NavLink>
       <NavLink exact to="/history">

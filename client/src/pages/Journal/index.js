@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 
-const CreateDay = () => {
+const Journal = () => {
   return (
     <section className="section">
-      <h1>New training day</h1>
+      <h1>Журнал</h1>
     </section>
   )
 }
 
 // const mapDispatchToProps = () => {}
 
-export default connect(null)(CreateDay)
+export default connect(null)(Journal)
