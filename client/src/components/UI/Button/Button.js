@@ -2,7 +2,8 @@ import React from 'react'
 import './Button.scss'
 
 const Button = (props) => {
-  const classes = 'btn waves-effect waves-light'
+  let classes = `btn waves-effect waves-light ${props.large && 'btn-large'} 
+  ${props.small && 'btn-small'}`
 
   return (
     <button
