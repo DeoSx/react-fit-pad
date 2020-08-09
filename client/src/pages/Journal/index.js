@@ -17,6 +17,8 @@ const Journal = () => {
   )
 }
 
-// const mapDispatchToProps = () => {}
+const mapStateToProps = (state) => {
+  return {}
+}
 
-export default connect(null)(Journal)
+export default connect(mapStateToProps)(Journal)

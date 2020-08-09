@@ -4,3 +4,17 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.day-container {
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #fafafa;
+  .day-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .day-body {
+    margin-top: 10px;
+  }
+}
