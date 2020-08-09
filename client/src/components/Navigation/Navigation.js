@@ -127,11 +127,19 @@ class Navigation extends Component {
 
     const authBlock = (
       <div className="auth-block">
-        <a className="btn-link" onClick={(e) => this.showModal(e, 'login')}>
+        <a
+          href="/"
+          className="btn-link"
+          onClick={(e) => this.showModal(e, 'login')}
+        >
           Sign in
         </a>
         /
-        <a className="btn-link" onClick={(e) => this.showModal(e, 'reg')}>
+        <a
+          href="/"
+          className="btn-link"
+          onClick={(e) => this.showModal(e, 'reg')}
+        >
           Sign up
         </a>
       </div>
@@ -152,7 +160,11 @@ class Navigation extends Component {
             <NavLink className="btn-link" to="/profile">
               Profile
             </NavLink>
-            <a className="btn-link" onClick={() => this.logoutHandler()}>
+            <a
+              href="/"
+              className="btn-link"
+              onClick={() => this.logoutHandler()}
+            >
               Logout
             </a>
           </Drowdown>
