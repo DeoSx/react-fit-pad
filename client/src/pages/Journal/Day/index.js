@@ -1,13 +1,14 @@
 import React from 'react'
 
-import Button from '../../../../components/UI/Button/Button'
-import Checkbox from '../../../../components/UI/Checkbox/Checkbox'
+import Button from '../../../components/UI/Button/Button'
+import Checkbox from '../../../components/UI/Checkbox/Checkbox'
 
 const Day = (props) => {
   const {} = props
   const date = new Date().toLocaleString()
 
   const exercises = []
+
   return (
     <div className="day-container">
       <div className="day-top">

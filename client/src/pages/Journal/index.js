@@ -1,11 +1,19 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
 
+import { getAll } from '../../store/excercise/excercise.api'
 import './Journal.scss'
 import Day from './components/Day/'
 import Button from '../../components/UI/Button/Button'
 
-const Journal = () => {
+const Journal = (props) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAll())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <section className="section">
       <div className="journal-top">
@@ -18,7 +26,15 @@ const Journal = () => {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    exercises: state.excercise.data
+  }
 }
 
-export default connect(mapStateToProps)(Journal)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAll: () => dispatch(getAll)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Journal)
