@@ -35,10 +35,12 @@ const Excercises = (props) => {
   const dispatch = useDispatch()
   const [selected, setSelected] = useState(null)
   const [input, setInput] = useState('')
+  // eslint-disable-next-line no-unused-vars
   const [disabled, setDisabled] = useState(null)
 
   useEffect(() => {
     dispatch(props.getAll())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const submitHandler = async (e) => {
