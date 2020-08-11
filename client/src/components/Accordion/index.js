@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import M from 'materialize-css/dist/js/materialize.js'
+import { M } from '../../index'
 
 const Accordion = ({ children }) => {
   const popoutRef = useRef(null)

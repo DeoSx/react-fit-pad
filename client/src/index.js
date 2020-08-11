@@ -7,12 +7,14 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './store/rootReducer'
-import 'materialize-css/dist/js/materialize.min.js'
+import _M from 'materialize-css/dist/js/materialize.min.js'
 
 import './index.css'
 import App from './App'
 
 import * as serviceWorker from './serviceWorker'
+
+export const M = _M
 
 const store = createStore(
   rootReducer,
