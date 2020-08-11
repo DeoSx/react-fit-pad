@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './store/rootReducer'
-import 'materialize-css/dist/js/materialize'
+import 'materialize-css/dist/js/materialize.min.js'
 
 import './index.css'
 import App from './App'
