@@ -20,14 +20,15 @@ const Journal = (props) => {
         <h1>Журнал</h1>
         <Button styleType="danger" text="Добавить тренировку" />
       </div>
-      <Day exercises={props.exercises} />
+      <Day />
     </section>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    exercises: state.excercise.data
+    exercises: state.excercise,
+    journal: state.journal
   }
 }
 
