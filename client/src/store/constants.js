@@ -4,3 +4,6 @@ export const AUTH_LOGOUT = 'AUTH/LOGOUT'
 export const USER_INFO = 'USER/INFO'
 
 export const EXCERCISE_GETALL = 'EXCERCISE/GETALL'
+
+export const JOURNAL_ADD = 'JOURNAL/ADD'
+export const JOURNAL_REMOVE = 'JOURNAL/REMOVE'

@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import { connect } from 'react-redux'
 
+import {
+  addToPlanAction,
+  removeFromPlanAction
+} from '../../../store/journal/journal.actions'
 import Modal from '../../../components/Modal/Modal'
 import Button from '../../../components/UI/Button/Button'
 import Checkbox from '../../../components/UI/Checkbox/Checkbox'
@@ -8,7 +13,7 @@ import Accordion from '../../../components/Accordion'
 import ItemAccordion from '../../../components/Accordion/Item'
 
 const Day = (props) => {
-  const { exercises } = props
+  const { exercises, addToPlanAction, removeFromPlanAction } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
 
@@ -38,10 +43,17 @@ const Day = (props) => {
             {exercises.map((i) => (
               <ItemAccordion key={i.id} title={i.name}>
                 {i.excercises.map((it) => (
-                  <Checkbox key={it._id} text={it.name} />
+                  <Checkbox
+                    key={it._id}
+                    text={it.name}
+                    item={it}
+                    checkIn={addToPlanAction}
+                    checkOut={removeFromPlanAction}
+                  />
                 ))}
               </ItemAccordion>
             ))}
+            <Button styleType="blue" text="Добавить" />
           </Accordion>
         </Modal>
       </CSSTransition>
@@ -49,4 +61,18 @@ const Day = (props) => {
   )
 }
 
-export default Day
+const mapStateToProps = (state) => {
+  return {
+    journal: state.journal,
+    exercises: state.excercise.data
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToPlanAction: (data) => dispatch(addToPlanAction(data)),
+    removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Day)
