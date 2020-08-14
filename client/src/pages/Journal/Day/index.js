@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
 import {
   addToPlanAction,
-  removeFromPlanAction
+  removeFromPlanAction,
+  clearPlanAction,
+  toDailyAction
 } from '../../../store/journal/journal.actions'
+
 import Modal from '../../../components/Modal/Modal'
 import Button from '../../../components/UI/Button/Button'
 import Checkbox from '../../../components/UI/Checkbox/Checkbox'
@@ -13,14 +16,26 @@ import Accordion from '../../../components/Accordion'
 import ItemAccordion from '../../../components/Accordion/Item'
 
 const Day = (props) => {
-  const { exercises, addToPlanAction, removeFromPlanAction } = props
+  const dispatch = useDispatch()
+  const {
+    exercises,
+    addToPlanAction,
+    removeFromPlanAction,
+    clearPlanAction,
+    addToDaily
+  } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
 
   const closeModalHandler = (e) => {
     if (e.target.classList.contains('overlay')) {
+      dispatch(clearPlanAction())
       setModalState(false)
     }
+  }
+
+  const addToDailyHandler = () => {
+    dispatch(addToDaily())
   }
 
   return (
@@ -53,7 +68,11 @@ const Day = (props) => {
                 ))}
               </ItemAccordion>
             ))}
-            <Button styleType="blue" text="Добавить" />
+            <Button
+              styleType="blue"
+              text="Добавить"
+              onClick={() => addToDailyHandler()}
+            />
           </Accordion>
         </Modal>
       </CSSTransition>
@@ -71,7 +90,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToPlanAction: (data) => dispatch(addToPlanAction(data)),
-    removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data))
+    removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data)),
+    clearPlanAction: () => dispatch(clearPlanAction),
+    addToDaily: () => dispatch(toDailyAction)
   }
 }
 
