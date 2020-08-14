@@ -1,7 +1,13 @@
-import { JOURNAL_ADD, JOURNAL_REMOVE } from '../constants'
+import {
+  JOURNAL_ADD,
+  JOURNAL_REMOVE,
+  JOURNAL_CLEARPLAN,
+  JOURNAL_ADDTODAYLY
+} from '../constants'
 
 const initialState = {
-  plan: []
+  plan: [],
+  dailyPlan: []
 }
 
 function journalReducer(state = initialState, action) {
@@ -15,6 +21,17 @@ function journalReducer(state = initialState, action) {
       return {
         ...state,
         plan: [...state.plan].filter((i) => i._id !== action.payload._id)
+      }
+    case JOURNAL_CLEARPLAN:
+      return {
+        ...state,
+        plan: []
+      }
+    case JOURNAL_ADDTODAYLY:
+      return {
+        ...state,
+        dailyPlan: [...state.plan],
+        plan: []
       }
     default:
       return {

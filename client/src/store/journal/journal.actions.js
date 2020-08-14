@@ -1,4 +1,9 @@
-import { JOURNAL_ADD, JOURNAL_REMOVE } from '../constants'
+import {
+  JOURNAL_ADD,
+  JOURNAL_REMOVE,
+  JOURNAL_CLEARPLAN,
+  JOURNAL_ADDTODAYLY
+} from '../constants'
 
 export function addToPlanAction(payload) {
   return {
@@ -11,5 +16,17 @@ export function removeFromPlanAction(payload) {
   return {
     type: JOURNAL_REMOVE,
     payload
+  }
+}
+
+export function clearPlanAction() {
+  return {
+    type: JOURNAL_CLEARPLAN
+  }
+}
+
+export function toDailyAction() {
+  return {
+    type: JOURNAL_ADDTODAYLY,
   }
 }
