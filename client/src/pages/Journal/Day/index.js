@@ -15,6 +15,8 @@ import Checkbox from '../../../components/UI/Checkbox/Checkbox'
 import Accordion from '../../../components/Accordion'
 import ItemAccordion from '../../../components/Accordion/Item'
 
+import DayBodyItem from './DayBodyItem'
+
 const Day = (props) => {
   const dispatch = useDispatch()
   const { exercises, addToPlanAction, removeFromPlanAction, addToDaily } = props
@@ -39,7 +41,9 @@ const Day = (props) => {
         <p className="day-date">{date}</p>
         <Button styleType="red" text="Сохранить" small={true} />
       </div>
-      <div className="day-body"></div>
+      <div className="day-body">
+        <DayBodyItem />
+      </div>
       <button
         onClick={() => setModalState(true)}
         className="btn-floating waves-effect waves-light green"

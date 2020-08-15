@@ -1,7 +1,9 @@
 import React from 'react'
 
 const DayBodyItem = () => {
-  return <div></div>
+  return <div>
+    
+  </div>
 }
 
 export default DayBodyItem
