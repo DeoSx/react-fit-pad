@@ -17,13 +17,7 @@ import ItemAccordion from '../../../components/Accordion/Item'
 
 const Day = (props) => {
   const dispatch = useDispatch()
-  const {
-    exercises,
-    addToPlanAction,
-    removeFromPlanAction,
-    clearPlanAction,
-    addToDaily
-  } = props
+  const { exercises, addToPlanAction, removeFromPlanAction, addToDaily } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
 
@@ -36,6 +30,7 @@ const Day = (props) => {
 
   const addToDailyHandler = () => {
     dispatch(addToDaily())
+    setModalState(false)
   }
 
   return (
@@ -91,7 +86,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToPlanAction: (data) => dispatch(addToPlanAction(data)),
     removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data)),
-    clearPlanAction: () => dispatch(clearPlanAction),
     addToDaily: () => dispatch(toDailyAction)
   }
 }
