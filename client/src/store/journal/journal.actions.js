@@ -27,6 +27,6 @@ export function clearPlanAction() {
 
 export function toDailyAction() {
   return {
-    type: JOURNAL_ADDTODAYLY,
+    type: JOURNAL_ADDTODAYLY
   }
 }

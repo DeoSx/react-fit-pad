@@ -30,7 +30,7 @@ function journalReducer(state = initialState, action) {
     case JOURNAL_ADDTODAYLY:
       return {
         ...state,
-        dailyPlan: [...state.plan],
+        dailyPlan: [...state.dailyPlan, ...state.plan],
         plan: []
       }
     default:
