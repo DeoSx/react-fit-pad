@@ -1,0 +1,34 @@
+.day-body__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  .body-name {
+    width: 20%;
+    @media (max-width: 650px) {
+      font-size: 12px;
+    }
+  }
+  .counter-list {
+    width: 70%;
+    display: flex;
+    &__item {
+      border-radius: 5px;
+      padding: 10px;
+      background-color: #e3f2fd;
+      border: 1px solid #2196f3;
+      p {
+        margin: 0;
+      }
+      @media (max-width: 768px) {
+        padding: 5px;
+      }
+      @media (max-width: 650px) {
+        font-size: 12px;
+      }
+    }
+    &__item:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

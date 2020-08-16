@@ -1,6 +1,7 @@
 import React from 'react'
 import './Confirm.scss'
 
+import { confirmBtnInModal } from '../../../styles'
 import Button from '../../UI/Button/Button'
 
 const ConfirmModal = (props) => {
@@ -12,8 +13,18 @@ const ConfirmModal = (props) => {
         <h3 className="title">{title}</h3>
       </div>
       <div className="confirm-actions">
-        <Button styleType="blue" text="Да" onClick={() => callback()} />
-        <Button styleType="red" text="Нет" onClick={() => close(false)} />
+        <Button
+          styleType="blue"
+          text="Да"
+          onClick={() => callback()}
+          style={confirmBtnInModal}
+        />
+        <Button
+          styleType="red"
+          text="Нет"
+          onClick={() => close(false)}
+          style={confirmBtnInModal}
+        />
       </div>
     </div>
   )
