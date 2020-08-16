@@ -21,4 +21,16 @@ const FormWrapper = styled.form`
   border-radius: 5px;
 `
 
-export { Wrapper, FormWrapper }
+const blockTextCenter = {
+  textAlign: 'center',
+  width: '100%',
+  display: 'block'
+}
+
+const confirmBtnInModal = {
+  marginTop: '10px',
+  maxWidth: '150px',
+  width: '100%'
+}
+
+export { Wrapper, FormWrapper, blockTextCenter, confirmBtnInModal }

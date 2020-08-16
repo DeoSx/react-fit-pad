@@ -9,6 +9,7 @@ import {
   toDailyAction
 } from '../../../store/journal/journal.actions'
 
+import DayBodyItem from './DaybodyItem'
 import Modal from '../../../components/Modal/Modal'
 import Button from '../../../components/UI/Button/Button'
 import Checkbox from '../../../components/UI/Checkbox/Checkbox'
@@ -17,7 +18,13 @@ import ItemAccordion from '../../../components/Accordion/Item'
 
 const Day = (props) => {
   const dispatch = useDispatch()
-  const { exercises, addToPlanAction, removeFromPlanAction, addToDaily } = props
+  const {
+    exercises,
+    addToPlanAction,
+    removeFromPlanAction,
+    addToDaily,
+    journal
+  } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
 
@@ -39,7 +46,11 @@ const Day = (props) => {
         <p className="day-date">{date}</p>
         <Button styleType="red" text="Сохранить" small={true} />
       </div>
-      <div className="day-body"></div>
+      <div className="day-body">
+        {journal.dailyPlan.map((i) => (
+          <DayBodyItem key={i._id} item={i} />
+        ))}
+      </div>
       <button
         onClick={() => setModalState(true)}
         className="btn-floating waves-effect waves-light green"
@@ -67,6 +78,7 @@ const Day = (props) => {
               styleType="blue"
               text="Добавить"
               onClick={() => addToDailyHandler()}
+              style={{ marginTop: '15px' }}
             />
           </Accordion>
         </Modal>

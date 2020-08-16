@@ -76,6 +76,7 @@ const Excercises = (props) => {
           text={'Создать'}
           styleType={'primary'}
           disabled={!selected || !input ? true : false}
+          style={{marginTop: '10px'}}
         />
       </FormWrapper>
 

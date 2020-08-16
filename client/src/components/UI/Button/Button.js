@@ -10,6 +10,7 @@ const Button = (props) => {
       className={props.styleType ? `${classes} ${props.styleType}` : classes}
       onClick={props.onClick}
       disabled={props.disabled}
+      style={props.style}
     >
       {props.text}
     </button>
