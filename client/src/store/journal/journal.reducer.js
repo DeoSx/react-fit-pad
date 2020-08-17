@@ -2,7 +2,8 @@ import {
   JOURNAL_ADD,
   JOURNAL_REMOVE,
   JOURNAL_CLEARPLAN,
-  JOURNAL_ADDTODAYLY
+  JOURNAL_ADDTODAYLY,
+  JOURNAL_ADDCOUNTER
 } from '../constants'
 
 const initialState = {
@@ -15,7 +16,7 @@ function journalReducer(state = initialState, action) {
     case JOURNAL_ADD:
       return {
         ...state,
-        plan: [...state.plan, { ...action.payload }]
+        plan: [...state.plan, { ...action.payload, counter: [] }]
       }
     case JOURNAL_REMOVE:
       return {
@@ -33,6 +34,22 @@ function journalReducer(state = initialState, action) {
         dailyPlan: [...state.dailyPlan, ...state.plan],
         plan: []
       }
+    case JOURNAL_ADDCOUNTER: {
+      return {
+        ...state,
+        dailyPlan: [
+          ...state.dailyPlan.map((it) =>
+            it._id === action.payload._id
+              ? {
+                  ...it,
+                  counter: [...it.counter, { ...action.payload }]
+                }
+              : it
+          )
+        ],
+        plan: [...state.plan]
+      }
+    }
     default:
       return {
         ...state
