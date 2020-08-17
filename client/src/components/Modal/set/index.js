@@ -4,7 +4,7 @@ import './set.scss'
 import Input from '../../UI/Input/Input'
 import Button from '../../UI/Button/Button'
 
-const SetModal = () => {
+const SetModal = ({ setHandler }) => {
   const [weight, setWeight] = useState('')
   const [reps, setReps] = useState('')
 
@@ -22,7 +22,11 @@ const SetModal = () => {
         value={reps}
         onChange={(e) => setReps(e.target.value)}
       />
-      <Button text="Ok" disabled={!weight || !reps ? true : false} />
+      <Button
+        text="Ok"
+        disabled={!weight || !reps ? true : false}
+        onClick={() => setHandler({ reps, weight })}
+      />
     </div>
   )
 }
