@@ -37,9 +37,8 @@ export function changeExcercise(data) {
 export function deleteExcercise(id) {
   return async (dispatch) => {
     try {
-      const res = await axios.delete(`excercise/delete/${id}`)
+      await axios.delete(`excercise/delete/${id}`)
       dispatch(getAll())
-      console.log(res)
     } catch (e) {
       console.error(e)
     }
