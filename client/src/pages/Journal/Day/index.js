@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { connect, useDispatch } from 'react-redux'
 
@@ -8,6 +8,7 @@ import {
   clearPlanAction,
   toDailyAction
 } from '../../../store/journal/journal.actions'
+import { createDay, getAllDays } from '../../../store/journal/journal.api'
 
 import DayBodyItem from './DaybodyItem'
 import Modal from '../../../components/Modal/Modal'
@@ -23,10 +24,17 @@ const Day = (props) => {
     addToPlanAction,
     removeFromPlanAction,
     addToDaily,
-    journal
+    journal,
+    createDay,
+    getAllDays
   } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
+
+  useEffect(() => {
+    dispatch(getAllDays())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const closeModalHandler = (e) => {
     if (e.target.classList.contains('overlay')) {
@@ -40,11 +48,20 @@ const Day = (props) => {
     setModalState(false)
   }
 
+  const submitHandler = (data) => {
+    createDay(data)
+  }
+
   return (
     <div className="day-container">
       <div className="day-top">
         <p className="day-date">{date}</p>
-        <Button styleType="red" text="Сохранить" small={true} />
+        <Button
+          styleType="red"
+          text="Сохранить"
+          small={true}
+          onClick={() => submitHandler({ day: journal.dailyPlan })}
+        />
       </div>
       <div className="day-body">
         {journal.dailyPlan.map((i) => (
@@ -98,7 +115,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToPlanAction: (data) => dispatch(addToPlanAction(data)),
     removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data)),
-    addToDaily: () => dispatch(toDailyAction)
+    addToDaily: () => dispatch(toDailyAction),
+    createDay: (data) => dispatch(createDay(data)),
+    getAllDays: () => dispatch(getAllDays)
   }
 }
 
