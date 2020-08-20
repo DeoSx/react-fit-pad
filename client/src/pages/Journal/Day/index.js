@@ -48,10 +48,6 @@ const Day = (props) => {
     setModalState(false)
   }
 
-  const submitHandler = (data) => {
-    createDay(data)
-  }
-
   return (
     <div className="day-container">
       <div className="day-top">
@@ -60,7 +56,7 @@ const Day = (props) => {
           styleType="red"
           text="Сохранить"
           small={true}
-          onClick={() => submitHandler({ day: journal.dailyPlan })}
+          onClick={() => createDay({ day: journal.dailyPlan })}
         />
       </div>
       <div className="day-body">

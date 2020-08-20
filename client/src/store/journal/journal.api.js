@@ -1,5 +1,4 @@
 import axios from '../../axios'
-import { getStorage } from '../../helpers/storage'
 
 export function createDay(data) {
   return async () => {
