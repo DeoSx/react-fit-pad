@@ -12,23 +12,30 @@ const subCounter = new Schema({
 })
 
 const subDay = new Schema({
-  counter: [subCounter],
-  idOfMuscleType: {
-    type: Number
+  _id: {
+    type: String
   },
   name: {
     type: String
   },
+  idOfMuscleType: {
+    type: Number
+  },
   nameOfMuscleType: {
     type: String
   },
-  _id: {
-    type: String
-  }
+  __v: {
+    type: Number
+  },
+  counter: [subCounter]
 })
 
 const JournalDay = new Schema({
-  day: [subDay]
+  day: [subDay],
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 })
 
 module.exports = model('JournalDay', JournalDay)
