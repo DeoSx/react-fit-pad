@@ -6,13 +6,12 @@ const router = Router()
 
 // api/journal/create
 router.post('/create', auth, async (req, res) => {
-  const { day } = req.body
+  const day = req.body
 
   if (!day) return res.status(400).json({ message: 'Try later' })
   try {
     const trainingDay = new JournalDay(day)
-    console.log('day', day)
-    console.log('training day', trainingDay)
+    
     await trainingDay.save()
     return res.status(201).json(trainingDay)
   } catch (e) {

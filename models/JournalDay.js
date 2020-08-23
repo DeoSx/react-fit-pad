@@ -8,24 +8,29 @@ const subCounter = new Schema({
   weight: {
     type: String,
     required: false
+  },
+  _id: {
+    type: String,
+    required: false
   }
 })
 
 const subDay = new Schema({
   _id: {
-    type: String
+    type: String,
+    required: true
   },
   name: {
-    type: String
+    type: String,
+    required: true
   },
   idOfMuscleType: {
-    type: Number
+    type: Number,
+    required: true
   },
   nameOfMuscleType: {
-    type: String
-  },
-  __v: {
-    type: Number
+    type: String,
+    required: true
   },
   counter: [subCounter]
 })
