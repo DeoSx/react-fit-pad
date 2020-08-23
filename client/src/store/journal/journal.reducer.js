@@ -3,7 +3,8 @@ import {
   JOURNAL_REMOVE,
   JOURNAL_CLEARPLAN,
   JOURNAL_ADDTODAYLY,
-  JOURNAL_ADDCOUNTER
+  JOURNAL_ADDCOUNTER,
+  JOURNAL_CLEARDAILYPLAN
 } from '../constants'
 
 const initialState = {
@@ -28,6 +29,12 @@ function journalReducer(state = initialState, action) {
         ...state,
         plan: []
       }
+    case JOURNAL_CLEARDAILYPLAN: {
+      return {
+        ...state,
+        dailyPlan: []
+      }
+    }
     case JOURNAL_ADDTODAYLY:
       return {
         ...state,
