@@ -2,15 +2,18 @@ import React, { useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 
 import { getAll } from '../../store/excercise/excercise.api'
+import { getAllDays } from '../../store/journal/journal.api'
 import './Journal.scss'
 import Day from './Day'
 import Button from '../../components/UI/Button/Button'
 
 const Journal = (props) => {
+  const { getAll } = props
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAll())
+    dispatch(getAllDays())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -34,7 +37,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAll: () => dispatch(getAll)
+    getAll: () => dispatch(getAll),
+    getAllDays: () => dispatch(getAllDays)
   }
 }
 

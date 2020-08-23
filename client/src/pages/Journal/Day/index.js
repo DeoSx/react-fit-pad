@@ -30,11 +30,7 @@ const Day = (props) => {
   } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
-
-  useEffect(() => {
-    dispatch(getAllDays())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const [disabled, setDisabled] = useState(false)
 
   const closeModalHandler = (e) => {
     if (e.target.classList.contains('overlay')) {
@@ -48,6 +44,12 @@ const Day = (props) => {
     setModalState(false)
   }
 
+  const createDayHandler = async () => {
+    setDisabled(true)
+    await createDay({ day: journal.dailyPlan })
+    setDisabled(false)
+  }
+
   return (
     <div className="day-container">
       <div className="day-top">
@@ -56,7 +58,8 @@ const Day = (props) => {
           styleType="red"
           text="Сохранить"
           small={true}
-          onClick={() => createDay({ day: journal.dailyPlan })}
+          onClick={() => createDayHandler()}
+          disabled={disabled}
         />
       </div>
       <div className="day-body">
