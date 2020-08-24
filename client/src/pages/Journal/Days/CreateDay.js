@@ -17,7 +17,7 @@ import Checkbox from '../../../components/UI/Checkbox/Checkbox'
 import Accordion from '../../../components/Accordion'
 import ItemAccordion from '../../../components/Accordion/Item'
 
-const Day = (props) => {
+const CreateDay = (props) => {
   const dispatch = useDispatch()
   const {
     exercises,
@@ -124,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Day)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateDay)
