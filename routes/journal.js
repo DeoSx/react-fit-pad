@@ -11,7 +11,7 @@ router.post('/create', auth, async (req, res) => {
   if (!day) return res.status(400).json({ message: 'Try later' })
   try {
     const trainingDay = new JournalDay(day)
-    
+
     await trainingDay.save()
     return res.status(201).json(trainingDay)
   } catch (e) {
@@ -23,7 +23,16 @@ router.post('/create', auth, async (req, res) => {
 router.get('', auth, async (req, res) => {
   try {
     let trainingDays = await JournalDay.find()
-    return res.send(trainingDays)
+
+    trainingDays = trainingDays.map((item) => {
+      return {
+        createdAt: item.createdAt,
+        day: item.day,
+        id: item._id
+      }
+    })
+
+    return res.send(trainingDays.reverse())
   } catch (e) {
     console.log(e.message)
     res.status(500).send('Server down')
