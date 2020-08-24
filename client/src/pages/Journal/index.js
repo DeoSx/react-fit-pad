@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux'
 import { getAll } from '../../store/excercise/excercise.api'
 import { getAllDays } from '../../store/journal/journal.api'
 import './Journal.scss'
-import Day from './Day'
+import CreateDay from './Days/CreateDay'
 import Button from '../../components/UI/Button/Button'
 
 const Journal = (props) => {
@@ -23,7 +23,7 @@ const Journal = (props) => {
         <h1>Журнал</h1>
         <Button styleType="danger" text="Добавить тренировку" />
       </div>
-      <Day />
+      <CreateDay />
     </section>
   )
 }
