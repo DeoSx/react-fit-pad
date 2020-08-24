@@ -5,10 +5,11 @@ import { getAll } from '../../store/excercise/excercise.api'
 import { getAllDays } from '../../store/journal/journal.api'
 import './Journal.scss'
 import CreateDay from './Days/CreateDay'
+import Day from './Days/Day'
 import Button from '../../components/UI/Button/Button'
 
 const Journal = (props) => {
-  const { getAll } = props
+  const { getAll, journal } = props
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,6 +25,9 @@ const Journal = (props) => {
         <Button styleType="danger" text="Добавить тренировку" />
       </div>
       <CreateDay />
+      {journal.days.map((day) => (
+        <Day item={day} key={day.id} />
+      ))}
     </section>
   )
 }
