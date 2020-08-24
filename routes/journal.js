@@ -20,7 +20,7 @@ router.post('/create', auth, async (req, res) => {
   }
 })
 
-router.get('', async (req, res) => {
+router.get('', auth, async (req, res) => {
   try {
     let trainingDays = await JournalDay.find()
     return res.send(trainingDays)
