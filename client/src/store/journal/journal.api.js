@@ -1,5 +1,5 @@
 import axios from '../../axios'
-import { clearDailyPlanAction } from './journal.actions'
+import { clearDailyPlanAction, getAllDaysAction } from './journal.actions'
 
 export function createDay(data) {
   return async (dispatch) => {
@@ -14,10 +14,11 @@ export function createDay(data) {
 }
 
 export function getAllDays() {
-  return async () => {
+  return async (dispatch) => {
     try {
       const res = await axios.get('journal')
-      console.log(res)
+      dispatch(getAllDaysAction(res.data))
+      console.log(res.data)
     } catch (e) {
       console.log(e)
     }
