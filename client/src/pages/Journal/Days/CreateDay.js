@@ -25,12 +25,16 @@ const Day = (props) => {
     removeFromPlanAction,
     addToDaily,
     journal,
-    createDay,
-    getAllDays
+    createDay
   } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(true)
+  const { dailyPlan } = journal
+
+  useEffect(() => {
+    dailyPlan.length ? setDisabled(false) : setDisabled(true)
+  }, [dailyPlan])
 
   const closeModalHandler = (e) => {
     if (e.target.classList.contains('overlay')) {
