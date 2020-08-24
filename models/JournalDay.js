@@ -39,7 +39,7 @@ const JournalDay = new Schema({
   day: [subDay],
   createdAt: {
     type: Date,
-    default: Date.now()
+    default: new Date()
   }
 })
 
