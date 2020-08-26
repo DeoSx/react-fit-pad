@@ -2,8 +2,10 @@ import React from 'react'
 import './Button.scss'
 
 const Button = (props) => {
-  let classes = `btn waves-effect waves-light ${props.large ? 'btn-large' : ''} 
-  ${props.small ? 'btn-small' : ''}`
+  const floating = props.float ? 'btn-floating' : 'btn'
+  const large = props.large ? 'btn-large' : ''
+  const small = props.small ? 'btn-small' : ''
+  const classes = `${floating} waves-effect waves-light ${large} ${small}`
 
   return (
     <button
@@ -12,7 +14,11 @@ const Button = (props) => {
       disabled={props.disabled}
       style={props.style}
     >
-      {props.text}
+      {props.float ? (
+        <i className="material-icons">{props.icon}</i>
+      ) : (
+        props.text
+      )}
     </button>
   )
 }
