@@ -39,7 +39,7 @@ const JournalDay = new Schema({
   day: [subDay],
   createdAt: {
     type: Date,
-    default: new Date()
+    default: new Date().toLocaleString()
   }
 })
 

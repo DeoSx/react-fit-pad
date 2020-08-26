@@ -10,7 +10,7 @@ const Day = (props) => {
   return (
     <div className="day-container">
       <div className="day-top">
-        <p className="day-date">{item.createdAt}</p>
+        <p className="day-date">{item.createdAt.toLocaleString()}</p>
         <Button styleType="blue" text="Изменить" small={true} />
       </div>
       <div className="day-body">

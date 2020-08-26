@@ -30,7 +30,7 @@ const CreateDay = (props) => {
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
   const [disabled, setDisabled] = useState(true)
-  const { dailyPlan } = journal
+  const { dailyPlan, newDay } = journal
 
   useEffect(() => {
     dailyPlan.length ? setDisabled(false) : setDisabled(true)
@@ -55,7 +55,7 @@ const CreateDay = (props) => {
   }
 
   return (
-    <div className="day-container">
+    <div className="day-container" style={{ borderColor: '#009688' }}>
       <div className="day-top">
         <p className="day-date">{date}</p>
         <Button
@@ -71,12 +71,12 @@ const CreateDay = (props) => {
           <DayBodyItem key={i._id} item={i} />
         ))}
       </div>
-      <button
+      <Button
         onClick={() => setModalState(true)}
-        className="btn-floating waves-effect waves-light green"
-      >
-        <i className="material-icons">add</i>
-      </button>
+        styleType="green"
+        float={true}
+        icon="add"
+      />
 
       <CSSTransition in={modalState} timeout={300} classNames="fade">
         <Modal modalState={modalState} close={closeModalHandler}>
