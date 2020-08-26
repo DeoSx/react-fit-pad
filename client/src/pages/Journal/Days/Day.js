@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Button from '../../../components/UI/Button/Button'
 import DayBodyItem from './DaybodyItem'
 
 const Day = (props) => {
+  const [change, setChange] = useState(false)
+
   const { item } = props
   return (
     <div className="day-container">
@@ -16,12 +18,7 @@ const Day = (props) => {
           <DayBodyItem key={i._id} item={i} />
         ))}
       </div>
-      <button
-        // onClick={() => setModalState(true)}
-        className="btn-floating waves-effect waves-light green"
-      >
-        <i className="material-icons">add</i>
-      </button>
+      <Button icon="add" float={true} styleType="blue" />
 
       {/* <CSSTransition in={modalState} timeout={300} classNames="fade">
         <Modal modalState={modalState} close={closeModalHandler}>
