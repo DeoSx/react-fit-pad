@@ -26,4 +26,8 @@
   .day-body {
     margin-top: 10px;
   }
+  .day-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }

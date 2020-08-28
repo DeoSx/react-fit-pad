@@ -8,5 +8,5 @@ export default combineReducers({
   auth: authGympad,
   user: userGympad,
   excercise: excerciseGympad,
-  journal: journalGympad
+  journal: journalGympad,
 })

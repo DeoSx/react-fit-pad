@@ -9,7 +9,7 @@ import Button from '../../../../components/UI/Button/Button'
 
 import { addCounterAction } from '../../../../store/journal/journal.actions'
 
-const DayBodyItem = ({ item, addCounter }) => {
+const DayBodyItem = ({ item, addCounter, state }) => {
   const [modalState, setModalState] = useState(false)
 
   const closeModal = (e) => {
@@ -31,12 +31,14 @@ const DayBodyItem = ({ item, addCounter }) => {
           <CounterItem item={{ ...it, idx }} key={idx} />
         ))}
       </div>
-      <Button
-        text="+"
-        small={true}
-        styleType="blue"
-        onClick={() => setModalState(true)}
-      />
+      {state && (
+        <Button
+          text="+"
+          small={true}
+          styleType="blue"
+          onClick={() => setModalState(true)}
+        />
+      )}
       <Modal modalState={modalState} close={closeModal}>
         <SetModal setHandler={counterHandler} />
       </Modal>
