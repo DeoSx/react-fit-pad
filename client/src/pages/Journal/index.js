@@ -4,7 +4,6 @@ import { CSSTransition } from 'react-transition-group'
 
 import { getAll } from '../../store/excercise/excercise.api'
 import { getAllDays } from '../../store/journal/journal.api'
-import { toggleNewDayAction } from '../../store/journal/journal.actions'
 import './Journal.scss'
 import CreateDay from './Days/CreateDay'
 import Day from './Days/Day'
@@ -32,7 +31,11 @@ const Journal = (props) => {
         />
       </div>
       <CSSTransition in={newDay} classNames="fade" timeout={300}>
-        {newDay ? <CreateDay /> : <p style={{ display: 'none' }}></p>}
+        {newDay ? (
+          <CreateDay state={newDay} />
+        ) : (
+          <p style={{ display: 'none' }}></p>
+        )}
       </CSSTransition>
 
       {journal.days.map((day) => (
@@ -51,8 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAll: () => dispatch(getAll),
-    getAllDays: () => dispatch(getAllDays),
-    toggleNewDay: (data) => dispatch(toggleNewDayAction(data))
+    getAllDays: () => dispatch(getAllDays)
   }
 }
 

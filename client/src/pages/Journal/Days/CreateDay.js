@@ -25,12 +25,13 @@ const CreateDay = (props) => {
     removeFromPlanAction,
     addToDaily,
     journal,
-    createDay
+    createDay,
+    state
   } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
   const [disabled, setDisabled] = useState(true)
-  const { dailyPlan, newDay } = journal
+  const { dailyPlan } = journal
 
   useEffect(() => {
     dailyPlan.length ? setDisabled(false) : setDisabled(true)
@@ -68,7 +69,7 @@ const CreateDay = (props) => {
       </div>
       <div className="day-body">
         {journal.dailyPlan.map((i) => (
-          <DayBodyItem key={i._id} item={i} />
+          <DayBodyItem key={i._id} item={i} state={state} />
         ))}
       </div>
       <Button
