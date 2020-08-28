@@ -18,7 +18,6 @@ export function getAllDays() {
     try {
       const res = await axios.get('journal')
       dispatch(getAllDaysAction(res.data))
-      console.log(res.data)
     } catch (e) {
       console.log(e)
     }
