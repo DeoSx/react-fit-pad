@@ -5,8 +5,7 @@ import {
   JOURNAL_ADDTODAYLY,
   JOURNAL_ADDCOUNTER,
   JOURNAL_CLEARDAILYPLAN,
-  JOURNAL_GETALLDAYS,
-  JOURNAL_TOGGLENEWDAY
+  JOURNAL_GETALLDAYS
 } from '../constants'
 
 export function addToPlanAction(payload) {
@@ -51,13 +50,6 @@ export function clearDailyPlanAction() {
 export function getAllDaysAction(payload) {
   return {
     type: JOURNAL_GETALLDAYS,
-    payload
-  }
-}
-
-export function toggleNewDayAction(payload) {
-  return {
-    type: JOURNAL_TOGGLENEWDAY,
     payload
   }
 }

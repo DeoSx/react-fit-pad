@@ -5,17 +5,13 @@ import {
   JOURNAL_ADDTODAYLY,
   JOURNAL_ADDCOUNTER,
   JOURNAL_CLEARDAILYPLAN,
-  JOURNAL_GETALLDAYS,
-  JOURNAL_TOGGLENEWDAY
+  JOURNAL_GETALLDAYS
 } from '../constants'
 
 const initialState = {
   plan: [],
   dailyPlan: [],
-  days: [],
-  newDay: {
-    show: false
-  }
+  days: []
 }
 
 function journalReducer(state = initialState, action) {
@@ -66,11 +62,6 @@ function journalReducer(state = initialState, action) {
       return {
         ...state,
         days: action.payload
-      }
-    case JOURNAL_TOGGLENEWDAY:
-      return {
-        ...state,
-        newDay: { ...state.newDay, show: action.payload }
       }
     default:
       return {
