@@ -6,7 +6,6 @@ import DayBodyItem from './DaybodyItem'
 
 const Day = (props) => {
   const [change, setChange] = useState(false)
-  const [show, setShow] = useState(false)
 
   const { item } = props
 
@@ -22,29 +21,29 @@ const Day = (props) => {
       <div className="day-top">
         <p className="day-date">{item.createdAt.toLocaleString()}</p>
 
-        {show ? (
+        {change ? (
           <Button
             styleType="red"
             text="Отмена"
             small={true}
-            onClick={() => setShow(false)}
+            onClick={() => setChange(false)}
           />
         ) : (
           <Button
             styleType="blue"
             text="Изменить"
             small={true}
-            onClick={() => setShow(true)}
+            onClick={() => setChange(true)}
           />
         )}
       </div>
       <div className="day-body">
         {item.day.map((i) => (
-          <DayBodyItem key={i._id} item={i} state={show} />
+          <DayBodyItem key={i._id} item={i} state={change} />
         ))}
       </div>
-      <CSSTransition in={show} timeout={300} classNames="fade">
-        {show ? buttonsBlock : <p style={{ display: 'none' }}></p>}
+      <CSSTransition in={change} timeout={300} classNames="fade">
+        {change ? buttonsBlock : <p style={{ display: 'none' }}></p>}
       </CSSTransition>
 
       {/* <CSSTransition in={modalState} timeout={300} classNames="fade">
