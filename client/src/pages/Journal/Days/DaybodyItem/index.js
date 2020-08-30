@@ -7,9 +7,7 @@ import SetModal from '../../../../components/Modal/set'
 import CounterItem from './CounterItem'
 import Button from '../../../../components/UI/Button/Button'
 
-import { addCounterAction } from '../../../../store/journal/journal.actions'
-
-const DayBodyItem = ({ item, addCounter, state }) => {
+const DayBodyItem = ({ item, counterAction, state, dayId }) => {
   const [modalState, setModalState] = useState(false)
 
   const closeModal = (e) => {
@@ -19,7 +17,10 @@ const DayBodyItem = ({ item, addCounter, state }) => {
   }
 
   const counterHandler = ({ reps, weight }) => {
-    addCounter({ _id: item._id, reps, weight })
+    dayId
+      ? counterAction({ _id: item._id, reps, weight, dayId })
+      : counterAction({ _id: item._id, reps, weight })
+
     setModalState(false)
   }
 
@@ -46,10 +47,4 @@ const DayBodyItem = ({ item, addCounter, state }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addCounter: (data) => dispatch(addCounterAction(data))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(DayBodyItem)
+export default DayBodyItem

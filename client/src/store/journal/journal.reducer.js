@@ -5,7 +5,8 @@ import {
   JOURNAL_ADDTODAYLY,
   JOURNAL_ADDCOUNTER,
   JOURNAL_CLEARDAILYPLAN,
-  JOURNAL_GETALLDAYS
+  JOURNAL_GETALLDAYS,
+  JOURNAL_COUNTERDAY
 } from '../constants'
 
 const initialState = {
@@ -63,6 +64,37 @@ function journalReducer(state = initialState, action) {
         ...state,
         days: action.payload
       }
+    case JOURNAL_COUNTERDAY: {
+      return {
+        ...state,
+        days: [
+          ...state.days.map((item) =>
+            item.id === action.payload.dayId
+              ? {
+                  ...item,
+                  day: [
+                    ...item.day.map((i) =>
+                      i._id === action.payload._id
+                        ? {
+                            ...i,
+                            counter: [
+                              ...i.counter,
+                              {
+                                _id: action.payload._id,
+                                reps: action.payload.reps,
+                                weight: action.payload.weight
+                              }
+                            ]
+                          }
+                        : i
+                    )
+                  ]
+                }
+              : item
+          )
+        ]
+      }
+    }
     default:
       return {
         ...state
