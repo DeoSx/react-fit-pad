@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
+import { counterDayAction } from '../../../store/journal/journal.actions'
 import Button from '../../../components/UI/Button/Button'
 import DayBodyItem from './DaybodyItem'
 
 const Day = (props) => {
   const [change, setChange] = useState(false)
 
-  const { item } = props
+  const { item, counterDay } = props
 
   const buttonsBlock = (
     <div className="day-buttons">
@@ -19,7 +21,7 @@ const Day = (props) => {
   return (
     <div className="day-container">
       <div className="day-top">
-        <p className="day-date">{item.createdAt.toLocaleString()}</p>
+        <p className="day-date">{item.createdAt}</p>
 
         {change ? (
           <Button
@@ -39,7 +41,13 @@ const Day = (props) => {
       </div>
       <div className="day-body">
         {item.day.map((i) => (
-          <DayBodyItem key={i._id} item={i} state={change} />
+          <DayBodyItem
+            key={i._id}
+            item={i}
+            state={change}
+            dayId={item.id}
+            counterAction={counterDay}
+          />
         ))}
       </div>
       <CSSTransition in={change} timeout={300} classNames="fade">
@@ -75,4 +83,10 @@ const Day = (props) => {
   )
 }
 
-export default Day
+const mapDispatchToProps = (dispatch) => {
+  return {
+    counterDay: (data) => dispatch(counterDayAction(data))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Day)

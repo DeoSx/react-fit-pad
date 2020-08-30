@@ -6,7 +6,8 @@ import {
   addToPlanAction,
   removeFromPlanAction,
   clearPlanAction,
-  toDailyAction
+  toDailyAction,
+  addCounterAction
 } from '../../../store/journal/journal.actions'
 import { createDay, getAllDays } from '../../../store/journal/journal.api'
 
@@ -26,7 +27,8 @@ const CreateDay = (props) => {
     addToDaily,
     journal,
     createDay,
-    state
+    state,
+    addCounter
   } = props
   const date = new Date().toLocaleString()
   const [modalState, setModalState] = useState(false)
@@ -69,7 +71,12 @@ const CreateDay = (props) => {
       </div>
       <div className="day-body">
         {journal.dailyPlan.map((i) => (
-          <DayBodyItem key={i._id} item={i} state={state} />
+          <DayBodyItem
+            key={i._id}
+            item={i}
+            state={state}
+            counterAction={addCounter}
+          />
         ))}
       </div>
       <Button
@@ -121,7 +128,8 @@ const mapDispatchToProps = (dispatch) => {
     removeFromPlanAction: (data) => dispatch(removeFromPlanAction(data)),
     addToDaily: () => dispatch(toDailyAction),
     createDay: (data) => dispatch(createDay(data)),
-    getAllDays: () => dispatch(getAllDays)
+    getAllDays: () => dispatch(getAllDays),
+    addCounter: (data) => dispatch(addCounterAction(data))
   }
 }
 
