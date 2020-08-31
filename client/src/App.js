@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { getUser } from './store/user/user.api'
 
 import Home from './pages/Home/Home'
-import History from './pages/History/History'
 import Programs from './pages/Programs/Programs'
 import BodySizes from './pages/BodySizes/BodySizes'
 import Excercises from './pages/Excercises/Excercises'
@@ -15,27 +14,22 @@ import Layout from './hoc/Layout/Layout'
 import './App.scss'
 
 function App(props) {
-
   const authRoutes = [
     {
       path: '/journal',
       component: Journal
     },
     {
-      path: '/history',
-      component: History,
-    },
-    {
       path: '/sizes',
-      component: BodySizes,
+      component: BodySizes
     },
     {
       path: '/programs',
-      component: Programs,
+      component: Programs
     },
     {
       path: '/profile',
-      component: Profile,
+      component: Profile
     },
     {
       path: '/excercises',
@@ -66,7 +60,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getUser: () => dispatch(getUser())
   }

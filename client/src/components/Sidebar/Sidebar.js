@@ -8,9 +8,6 @@ const Sidebar = () => {
       <NavLink exact to="/journal">
         Журнал
       </NavLink>
-      <NavLink exact to="/history">
-        История
-      </NavLink>
       <NavLink exact to="/programs">
         Тренировочные программы
       </NavLink>
