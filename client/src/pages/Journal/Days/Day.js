@@ -26,7 +26,7 @@ const Day = (props) => {
         {change ? (
           <Button
             styleType="red"
-            text="Отмена"
+            text="Выйти"
             small={true}
             onClick={() => setChange(false)}
           />
