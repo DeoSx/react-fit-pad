@@ -95,9 +95,8 @@ const CreateDay = (props) => {
                   <Checkbox
                     key={it._id}
                     text={it.name}
-                    item={it}
-                    checkIn={addToPlanAction}
-                    checkOut={removeFromPlanAction}
+                    checkIn={() => addToPlanAction(it)}
+                    checkOut={() => removeFromPlanAction(it)}
                   />
                 ))}
               </ItemAccordion>
