@@ -3,18 +3,45 @@ import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
 import { counterDayAction } from '../../../store/journal/journal.actions'
+import { editDay } from '../../../store/journal/journal.api'
+import Modal from '../../../components/Modal/Modal'
+import Accordion from '../../../components/Accordion'
+import ItemAccordion from '../../../components/Accordion/Item'
 import Button from '../../../components/UI/Button/Button'
 import DayBodyItem from './DaybodyItem'
+import Checkbox from '../../../components/UI/Checkbox/Checkbox'
 
 const Day = (props) => {
   const [change, setChange] = useState(false)
+  const [modalState, setModalState] = useState(false)
 
-  const { item, counterDay } = props
+  const { item, counterDay, editDay, exercise } = props
+
+  const saveHandler = async () => {
+    await editDay(item)
+    setChange(false)
+  }
+
+  const closeModalHandler = (e) => {
+    if (e.target.classList.contains('overlay')) {
+      setModalState(false)
+    }
+  }
 
   const buttonsBlock = (
     <div className="day-buttons">
-      <Button icon="add" float={true} styleType="blue" />
-      <Button styleType="green" small={true} text="Сохранить" />
+      <Button
+        icon="add"
+        float={true}
+        styleType="blue"
+        onClick={() => setModalState(true)}
+      />
+      <Button
+        styleType="green"
+        small={true}
+        text="Сохранить"
+        onClick={() => saveHandler()}
+      />
     </div>
   )
 
@@ -54,18 +81,17 @@ const Day = (props) => {
         {change ? buttonsBlock : <p style={{ display: 'none' }}></p>}
       </CSSTransition>
 
-      {/* <CSSTransition in={modalState} timeout={300} classNames="fade">
+      <CSSTransition in={modalState} timeout={300} classNames="fade">
         <Modal modalState={modalState} close={closeModalHandler}>
           <Accordion>
-            {exercises.map((i) => (
+            {exercise.map((i) => (
               <ItemAccordion key={i.id} title={i.name}>
                 {i.excercises.map((it) => (
                   <Checkbox
                     key={it._id}
                     text={it.name}
-                    item={it}
-                    checkIn={addToPlanAction}
-                    checkOut={removeFromPlanAction}
+                    // checkIn={addToPlanAction}
+                    // checkOut={removeFromPlanAction}
                   />
                 ))}
               </ItemAccordion>
@@ -73,20 +99,26 @@ const Day = (props) => {
             <Button
               styleType="blue"
               text="Добавить"
-              onClick={() => addToDailyHandler()}
               style={{ marginTop: '15px' }}
             />
           </Accordion>
         </Modal>
-      </CSSTransition> */}
+      </CSSTransition>
     </div>
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    counterDay: (data) => dispatch(counterDayAction(data))
+    exercise: state.excercise.data
   }
 }
 
-export default connect(null, mapDispatchToProps)(Day)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    counterDay: (data) => dispatch(counterDayAction(data)),
+    editDay: (data) => dispatch(editDay(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Day)
