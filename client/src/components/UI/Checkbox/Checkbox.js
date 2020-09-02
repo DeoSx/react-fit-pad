@@ -3,16 +3,16 @@ import React, { useState } from 'react'
 import './Checkbox.scss'
 
 const Checkbox = (props) => {
-  const { text, item, checkIn, checkOut } = props
+  const { text, checkIn, checkOut } = props
 
   const [checked, setCheck] = useState(false)
 
   const checkHandler = () => {
     setCheck(!checked)
     if (!checked) {
-      checkIn(item)
+      checkIn()
     } else {
-      checkOut(item)
+      checkOut()
     }
   }
 
