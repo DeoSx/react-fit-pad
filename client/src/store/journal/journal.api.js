@@ -23,3 +23,13 @@ export function getAllDays() {
     }
   }
 }
+
+export function editDay(data) {
+  return async () => {
+    try {
+      await axios.put('journal/edit', data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
