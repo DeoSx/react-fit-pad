@@ -10,13 +10,13 @@ import Day from './Days/Day'
 import Button from '../../components/UI/Button/Button'
 
 const Journal = (props) => {
-  const { getAll, journal } = props
+  const { getAllDays, getAll, journal } = props
   const [newDay, setNewDay] = useState(false)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAll())
-    dispatch(getAllDays())
+    getAll()
+    getAllDays()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -53,8 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAll: () => dispatch(getAll),
-    getAllDays: () => dispatch(getAllDays)
+    getAll: () => dispatch(getAll()),
+    getAllDays: () => dispatch(getAllDays())
   }
 }
 
