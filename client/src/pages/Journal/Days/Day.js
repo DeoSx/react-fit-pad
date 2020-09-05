@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
-import { counterDayAction } from '../../../store/journal/journal.actions'
+import {
+  counterDayAction,
+  toEditDayAction,
+  clearPlanAction,
+  editDayAction
+} from '../../../store/journal/journal.actions'
 import { editDay } from '../../../store/journal/journal.api'
 import Modal from '../../../components/Modal/Modal'
 import Accordion from '../../../components/Accordion'
@@ -15,7 +20,16 @@ const Day = (props) => {
   const [change, setChange] = useState(false)
   const [modalState, setModalState] = useState(false)
 
-  const { item, counterDay, editDay, exercise } = props
+  const {
+    item,
+    counterDay,
+    editDay,
+    exercise,
+    toEditDay,
+    clearPlan,
+    editDayAction,
+    journalPlan
+  } = props
 
   const saveHandler = async () => {
     await editDay(item)
@@ -26,6 +40,22 @@ const Day = (props) => {
     if (e.target.classList.contains('overlay')) {
       setModalState(false)
     }
+  }
+
+  const editDayHandler = () => {
+    setChange(true)
+    toEditDay(item)
+  }
+
+  const clearDayHandler = () => {
+    setChange(false)
+    clearPlan()
+  }
+
+  const counterSetHandler = ({ reps, weight, _id }) => {
+    counterDay({ _id, reps, weight })
+    editDayAction(journalPlan)
+    console.log(journalPlan)
   }
 
   const buttonsBlock = (
@@ -55,14 +85,14 @@ const Day = (props) => {
             styleType="red"
             text="Выйти"
             small={true}
-            onClick={() => setChange(false)}
+            onClick={() => clearDayHandler()}
           />
         ) : (
           <Button
             styleType="blue"
             text="Изменить"
             small={true}
-            onClick={() => setChange(true)}
+            onClick={() => editDayHandler()}
           />
         )}
       </div>
@@ -73,7 +103,7 @@ const Day = (props) => {
             item={i}
             state={change}
             dayId={item.id}
-            counterAction={counterDay}
+            counterAction={counterSetHandler}
           />
         ))}
       </div>
@@ -117,7 +147,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     counterDay: (data) => dispatch(counterDayAction(data)),
-    editDay: (data) => dispatch(editDay(data))
+    editDay: (data) => dispatch(editDay(data)),
+    toEditDay: (data) => dispatch(toEditDayAction(data)),
+    clearPlan: () => dispatch(clearPlanAction()),
+    editDayAction: (data) => dispatch(editDayAction(data))
   }
 }
 

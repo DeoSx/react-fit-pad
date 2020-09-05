@@ -12,7 +12,6 @@ import Button from '../../components/UI/Button/Button'
 const Journal = (props) => {
   const { getAllDays, getAll, journal } = props
   const [newDay, setNewDay] = useState(false)
-  // const dispatch = useDispatch()
 
   useEffect(() => {
     getAll()
@@ -39,7 +38,7 @@ const Journal = (props) => {
       </CSSTransition>
 
       {journal.days.map((day) => (
-        <Day item={day} key={day.id} />
+        <Day item={day} key={day.id} journalPlan={journal.plan} />
       ))}
     </section>
   )
