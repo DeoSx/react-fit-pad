@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
 import { getAll } from '../../store/excercise/excercise.api'
