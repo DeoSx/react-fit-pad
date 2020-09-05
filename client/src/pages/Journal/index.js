@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
 import { getAll } from '../../store/excercise/excercise.api'
@@ -10,13 +10,12 @@ import Day from './Days/Day'
 import Button from '../../components/UI/Button/Button'
 
 const Journal = (props) => {
-  const { getAll, journal } = props
+  const { getAllDays, getAll, journal } = props
   const [newDay, setNewDay] = useState(false)
-  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAll())
-    dispatch(getAllDays())
+    getAll()
+    getAllDays()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -39,7 +38,7 @@ const Journal = (props) => {
       </CSSTransition>
 
       {journal.days.map((day) => (
-        <Day item={day} key={day.id} />
+        <Day item={day} key={day.id} journalPlan={journal.plan} />
       ))}
     </section>
   )
@@ -53,8 +52,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAll: () => dispatch(getAll),
-    getAllDays: () => dispatch(getAllDays)
+    getAll: () => dispatch(getAll()),
+    getAllDays: () => dispatch(getAllDays())
   }
 }
 

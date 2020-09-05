@@ -7,11 +7,13 @@ import {
   JOURNAL_CLEARDAILYPLAN,
   JOURNAL_GETALLDAYS,
   JOURNAL_COUNTERDAY,
-  JOURNAL_ADDEXERCISE
+  JOURNAL_ADDEXERCISE,
+  JOURNAL_TOEDITDAY,
+  JOURNAL_EDITDAY
 } from '../constants'
 
 const initialState = {
-  plan: [],
+  plan: null,
   dailyPlan: [],
   days: [],
   editPlan: [],
@@ -33,7 +35,7 @@ function journalReducer(state = initialState, action) {
     case JOURNAL_CLEARPLAN:
       return {
         ...state,
-        plan: []
+        plan: null
       }
     case JOURNAL_CLEARDAILYPLAN: {
       return {
@@ -67,59 +69,39 @@ function journalReducer(state = initialState, action) {
         ...state,
         days: action.payload
       }
+    case JOURNAL_TOEDITDAY:
+      return {
+        ...state,
+        plan: action.payload
+      }
     case JOURNAL_COUNTERDAY:
       return {
         ...state,
+        plan: {
+          ...state.plan,
+          day: [
+            ...state.plan.day.map((i) =>
+              i._id === action.payload._id
+                ? { ...i, counter: [...i.counter, action.payload] }
+                : i
+            )
+          ]
+        }
+      }
+    case JOURNAL_EDITDAY:
+      return {
+        ...state,
         days: [
-          ...state.days.map((item) =>
-            item.id === action.payload.dayId
-              ? {
-                  ...item,
-                  day: [
-                    ...item.day.map((i) =>
-                      i._id === action.payload._id
-                        ? {
-                            ...i,
-                            counter: [
-                              ...i.counter,
-                              {
-                                _id: action.payload._id,
-                                reps: action.payload.reps,
-                                weight: action.payload.weight
-                              }
-                            ]
-                          }
-                        : i
-                    )
-                  ]
-                }
-              : item
+          ...state.days.map((day) =>
+            day.id === action.payload.id ? action.payload : day
           )
         ]
       }
     case JOURNAL_ADDEXERCISE:
       return {
-        ...state,
-        days: [
-          ...state.days.map((item) =>
-            item.id === action.payload.id
-              ? {
-                  ...item,
-                  day: [
-                    ...item.day,
-                    {
-                      counter: [],
-                      idOfMuscleType: action.payload.idOfMuscleType,
-                      name: action.payload.name,
-                      nameOfMuscleType: action.payload.nameOfMuscleType,
-                      _id: action.payload._id
-                    }
-                  ]
-                }
-              : item
-          )
-        ]
+        ...state
       }
+
     default:
       return {
         ...state
