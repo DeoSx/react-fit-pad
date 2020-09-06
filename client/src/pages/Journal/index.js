@@ -38,7 +38,7 @@ const Journal = (props) => {
       </CSSTransition>
 
       {journal.days.map((day) => (
-        <Day item={day} key={day.id} journalPlan={journal.plan} />
+        <Day item={day} key={day.id} />
       ))}
     </section>
   )

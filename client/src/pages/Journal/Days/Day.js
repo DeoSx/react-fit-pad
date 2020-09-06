@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
@@ -20,16 +20,7 @@ const Day = (props) => {
   const [change, setChange] = useState(false)
   const [modalState, setModalState] = useState(false)
 
-  const {
-    item,
-    counterDay,
-    editDay,
-    exercise,
-    toEditDay,
-    clearPlan,
-    editDayAction,
-    journalPlan
-  } = props
+  const { item, counterDay, editDay, exercise, toEditDay, clearPlan } = props
 
   const saveHandler = async () => {
     await editDay(item)
@@ -42,20 +33,9 @@ const Day = (props) => {
     }
   }
 
-  const editDayHandler = () => {
-    setChange(true)
-    toEditDay(item)
-  }
-
   const clearDayHandler = () => {
     setChange(false)
     clearPlan()
-  }
-
-  const counterSetHandler = ({ reps, weight, _id }) => {
-    counterDay({ _id, reps, weight })
-    editDayAction(journalPlan)
-    console.log(journalPlan)
   }
 
   const buttonsBlock = (
@@ -92,7 +72,7 @@ const Day = (props) => {
             styleType="blue"
             text="Изменить"
             small={true}
-            onClick={() => editDayHandler()}
+            onClick={() => setChange(true)}
           />
         )}
       </div>
@@ -103,7 +83,7 @@ const Day = (props) => {
             item={i}
             state={change}
             dayId={item.id}
-            counterAction={counterSetHandler}
+            counterAction={counterDay}
           />
         ))}
       </div>
@@ -140,7 +120,8 @@ const Day = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    exercise: state.excercise.data
+    exercise: state.excercise.data,
+    journalPlan: state.journal.plan
   }
 }
 
