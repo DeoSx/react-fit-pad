@@ -4,9 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import {
   counterDayAction,
-  toEditDayAction,
-  clearPlanAction,
-  editDayAction
+  clearPlanAction
 } from '../../../store/journal/journal.actions'
 import { editDay } from '../../../store/journal/journal.api'
 import Modal from '../../../components/Modal/Modal'
@@ -20,7 +18,7 @@ const Day = (props) => {
   const [change, setChange] = useState(false)
   const [modalState, setModalState] = useState(false)
 
-  const { item, counterDay, editDay, exercise, toEditDay, clearPlan } = props
+  const { item, counterDay, editDay, exercise, clearPlan } = props
 
   const saveHandler = async () => {
     await editDay(item)
@@ -129,9 +127,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     counterDay: (data) => dispatch(counterDayAction(data)),
     editDay: (data) => dispatch(editDay(data)),
-    toEditDay: (data) => dispatch(toEditDayAction(data)),
-    clearPlan: () => dispatch(clearPlanAction()),
-    editDayAction: (data) => dispatch(editDayAction(data))
+    clearPlan: () => dispatch(clearPlanAction())
   }
 }
 
