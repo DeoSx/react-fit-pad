@@ -16,7 +16,7 @@ const DayBodyItem = ({ item, counterAction, state, dayId }) => {
   }
 
   const counterHandler = ({ reps, weight }) => {
-    counterAction({ _id: item._id, reps, weight })
+    counterAction({ _id: item._id, reps, weight, dayId })
     setModalState(false)
   }
 

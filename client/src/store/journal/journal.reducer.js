@@ -77,23 +77,39 @@ function journalReducer(state = initialState, action) {
     case JOURNAL_COUNTERDAY:
       return {
         ...state,
-        plan: {
-          ...state.plan,
-          day: [
-            ...state.plan.day.map((i) =>
-              i._id === action.payload._id
-                ? { ...i, counter: [...i.counter, action.payload] }
-                : i
-            )
-          ]
-        }
+        days: [
+          ...state.days.map((item) =>
+            item.id === action.payload.dayId
+              ? {
+                  ...item,
+                  day: [
+                    ...item.day.map((i) =>
+                      i._id === action.payload._id
+                        ? {
+                            ...i,
+                            counter: [
+                              ...i.counter,
+                              {
+                                _id: action.payload._id,
+                                reps: action.payload.reps,
+                                weight: action.payload.weight
+                              }
+                            ]
+                          }
+                        : i
+                    )
+                  ]
+                }
+              : item
+          )
+        ]
       }
     case JOURNAL_EDITDAY:
       return {
         ...state,
         days: [
           ...state.days.map((day) =>
-            day.id === action.payload.id ? action.payload : day
+            day.id === action.payload.id ? { ...action.payload } : day
           )
         ]
       }
