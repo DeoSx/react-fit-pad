@@ -7,9 +7,7 @@ import {
   JOURNAL_CLEARDAILYPLAN,
   JOURNAL_GETALLDAYS,
   JOURNAL_COUNTERDAY,
-  JOURNAL_ADDEXERCISE,
-  JOURNAL_TOEDITDAY,
-  JOURNAL_EDITDAY
+  JOURNAL_ADDEXERCISE
 } from '../constants'
 
 const initialState = {
@@ -69,11 +67,6 @@ function journalReducer(state = initialState, action) {
         ...state,
         days: action.payload
       }
-    case JOURNAL_TOEDITDAY:
-      return {
-        ...state,
-        plan: action.payload
-      }
     case JOURNAL_COUNTERDAY:
       return {
         ...state,
@@ -101,15 +94,6 @@ function journalReducer(state = initialState, action) {
                   ]
                 }
               : item
-          )
-        ]
-      }
-    case JOURNAL_EDITDAY:
-      return {
-        ...state,
-        days: [
-          ...state.days.map((day) =>
-            day.id === action.payload.id ? { ...action.payload } : day
           )
         ]
       }
