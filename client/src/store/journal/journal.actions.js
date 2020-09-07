@@ -7,7 +7,9 @@ import {
   JOURNAL_CLEARDAILYPLAN,
   JOURNAL_GETALLDAYS,
   JOURNAL_COUNTERDAY,
-  JOURNAL_ADDEXERCISE
+  JOURNAL_ADDEDITEXERCISE,
+  JOURNAL_REMOVEEDITEXERCISE,
+  JOURNAL_SUMEXERCISES
 } from '../constants'
 
 export function addToPlanAction(payload) {
@@ -65,7 +67,21 @@ export function counterDayAction(payload) {
 
 export function addExerciseDayAction(payload) {
   return {
-    type: JOURNAL_ADDEXERCISE,
+    type: JOURNAL_ADDEDITEXERCISE,
+    payload
+  }
+}
+
+export function removeExerciseDayAction(payload) {
+  return {
+    type: JOURNAL_REMOVEEDITEXERCISE,
+    payload
+  }
+}
+
+export function sumExercisesAction(payload) {
+  return {
+    type: JOURNAL_SUMEXERCISES,
     payload
   }
 }
