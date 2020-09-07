@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
 import {
   counterDayAction,
+  addExerciseDayAction,
+  removeExerciseDayAction,
+  sumExercisesAction,
   clearPlanAction
 } from '../../../store/journal/journal.actions'
 import { editDay } from '../../../store/journal/journal.api'
@@ -18,22 +21,34 @@ const Day = (props) => {
   const [change, setChange] = useState(false)
   const [modalState, setModalState] = useState(false)
 
-  const { item, counterDay, editDay, exercise, clearPlan } = props
+  const {
+    item,
+    counterDay,
+    editDay,
+    exercise,
+    addExercise,
+    removeExercise,
+    sumExercise,
+    clearPlan
+  } = props
 
   const saveHandler = async () => {
     await editDay(item)
     setChange(false)
+    clearPlan()
   }
 
   const closeModalHandler = (e) => {
     if (e.target.classList.contains('overlay')) {
       setModalState(false)
+      clearPlan()
     }
   }
 
-  const clearDayHandler = () => {
-    setChange(false)
+  const addExerciseHandler = () => {
+    sumExercise(item.id)
     clearPlan()
+    setModalState(false)
   }
 
   const buttonsBlock = (
@@ -63,7 +78,7 @@ const Day = (props) => {
             styleType="red"
             text="Выйти"
             small={true}
-            onClick={() => clearDayHandler()}
+            onClick={() => setChange(false)}
           />
         ) : (
           <Button
@@ -98,8 +113,8 @@ const Day = (props) => {
                   <Checkbox
                     key={it._id}
                     text={it.name}
-                    // checkIn={addToPlanAction}
-                    // checkOut={removeFromPlanAction}
+                    checkIn={() => addExercise(it)}
+                    checkOut={() => removeExercise(it)}
                   />
                 ))}
               </ItemAccordion>
@@ -108,6 +123,7 @@ const Day = (props) => {
               styleType="blue"
               text="Добавить"
               style={{ marginTop: '15px' }}
+              onClick={() => addExerciseHandler()}
             />
           </Accordion>
         </Modal>
@@ -127,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     counterDay: (data) => dispatch(counterDayAction(data)),
     editDay: (data) => dispatch(editDay(data)),
+    addExercise: (data) => dispatch(addExerciseDayAction(data)),
+    removeExercise: (data) => dispatch(removeExerciseDayAction(data)),
+    sumExercise: (data) => dispatch(sumExercisesAction(data)),
     clearPlan: () => dispatch(clearPlanAction())
   }
 }
