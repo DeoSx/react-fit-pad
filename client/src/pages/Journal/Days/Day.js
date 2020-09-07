@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
-import {
-  counterDayAction,
-  clearPlanAction
-} from '../../../store/journal/journal.actions'
+import { counterDayAction } from '../../../store/journal/journal.actions'
 import { editDay } from '../../../store/journal/journal.api'
 import Modal from '../../../components/Modal/Modal'
 import Accordion from '../../../components/Accordion'
@@ -29,11 +26,6 @@ const Day = (props) => {
     if (e.target.classList.contains('overlay')) {
       setModalState(false)
     }
-  }
-
-  const clearDayHandler = () => {
-    setChange(false)
-    clearPlan()
   }
 
   const buttonsBlock = (
@@ -63,7 +55,7 @@ const Day = (props) => {
             styleType="red"
             text="Выйти"
             small={true}
-            onClick={() => clearDayHandler()}
+            onClick={() => setChange(false)}
           />
         ) : (
           <Button
@@ -126,8 +118,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     counterDay: (data) => dispatch(counterDayAction(data)),
-    editDay: (data) => dispatch(editDay(data)),
-    clearPlan: () => dispatch(clearPlanAction())
+    editDay: (data) => dispatch(editDay(data))
   }
 }
 
