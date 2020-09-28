@@ -1,9 +1,9 @@
-import axios from 'axios'
+import _axios from 'axios'
 import { getStorage } from '../helpers/storage'
 
 const auth = getStorage('auth')
 
-const _axios = axios.create({
+const axios = _axios.create({
   baseURL: 'http://localhost:5000/api/',
   headers: {
     'Content-Type': 'application/json',
@@ -11,4 +11,14 @@ const _axios = axios.create({
   }
 })
 
-export default _axios
+axios.interceptors.request.use((config) => {
+  const requestConfig = { ...config }
+  const token = getStorage('auth').token
+  if (token) {
+    requestConfig.headers.Authorization = `Bearer ${token}`
+    return requestConfig
+  }
+  return requestConfig
+})
+
+export default axios
