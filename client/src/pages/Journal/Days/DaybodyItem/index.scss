@@ -6,6 +6,9 @@
   .body-name {
     width: 20%;
     @media (max-width: 650px) {
+      margin-top: 0;
+      margin-bottom: 5px;
+      width: 100%;
       font-size: 12px;
     }
   }
@@ -14,7 +17,7 @@
     margin: 0;
   }
   .counter-list {
-    width: 70%;
+    width: 78%;
     display: flex;
     &__item {
       border-radius: 5px;
@@ -33,6 +36,14 @@
     }
     &__item:not(:last-child) {
       margin-right: 10px;
+    }
+  }
+  @media (max-width: 650px) {
+    flex-direction: column;
+    align-self: start;
+    margin-bottom: 10px;
+    .counter-list {
+      width: 100%;
     }
   }
 }
