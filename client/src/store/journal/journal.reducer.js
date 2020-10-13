@@ -13,7 +13,7 @@ import {
 } from '../constants'
 
 const initialState = {
-  plan: null,
+  plan: [],
   dailyPlan: [],
   days: [],
   editPlan: [],
